@@ -44,10 +44,10 @@ social:
   links:
     # The first element serves as the copyright owner's link
           # change to your twitter homepage
-    - https://github.com/AbdoD97       # change to your github homepage
+    #- https://github.com/AbdoD97       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com//
-     - https://www.linkedin.com/in/abdelrahmanhesham97/
+   #  - https://www.linkedin.com/in/abdelrahmanhesham97/
 
 google_site_verification: google_meta_tag_verification # change to your verification string
 

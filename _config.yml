@@ -40,14 +40,14 @@ social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: abdelrahman eldawi
-  email: example@doamin.com             # change to your email address
+  email: abdelrahman.eldawi97@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+          # change to your twitter homepage
+    - https://github.com/AbdoD97       # change to your github homepage
     # Uncomment below to add more social links
-    # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    # - https://www.facebook.com//
+     - https://www.linkedin.com/in/abdelrahmanhesham97/
 
 google_site_verification: google_meta_tag_verification # change to your verification string
 

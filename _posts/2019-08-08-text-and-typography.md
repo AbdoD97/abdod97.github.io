@@ -180,10 +180,9 @@ class
 
 <img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image20.png?raw=true" style="width:1.78125in;height:0.32292in" />
 
-For the second time, It it decrypting a resources and loading it them to
-memory the memory, But life is too short to trace both unpacking
-functions .so, We are going to replicated this code snippet into
-compiler and extract both files writing them to disk
+For the second time, It it decrypting a resources and loading it them to the memory, But life is too short to trace both unpacking
+functions .so, We are going to replicate this code snippet into
+VSCode and extract both files by writing them to disk after decryption
 
 <img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image21.png?raw=true" style="width:6.5in;height:2.51319in" />
 

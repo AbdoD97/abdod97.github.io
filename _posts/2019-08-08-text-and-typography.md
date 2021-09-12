@@ -11,44 +11,12 @@ image:
   width: 850
   height: 585
 ---
-# Table of Contents
-
-[Initial assessment 2](#initial-assessment)
-
-[Analysis 3](#analysis)
-
-[Resources 3](#resources)
-
-[Execution analysis 4](#execution-analysis)
-
-[Extracted file Analysis 7](#extracted-file-analysis)
-
-[File initial assessment 7](#file-initial-assessment)
-
-[Analysis 8](#analysis-1)
-
-[Resources 8](#resources-1)
-
-[Execution analysis 8](#execution-analysis-1)
-
-[Analyzing Second file 10](#analyzing-second-file)
-
-[File initial assessment 10](#file-initial-assessment-1)
-
-[Analysis 11](#analysis-2)
-
-[Analyzing third file 13](#analyzing-third-file)
-
-[File initial assessment 13](#file-initial-assessment-2)
-
-**  
-**
 
 # Initial assessment
 
 At Malware initial assessment using **PE-Studio**
 
-<img src="![]({{ site.baseurl }}/media/image1.png" style="width:6.5in;height:2.78681in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image1.png" style="width:6.5in;height:2.78681in" />
 
 It looks like
 
@@ -61,7 +29,7 @@ It looks like
 
 By using **DIE** to analyze each section entropy
 
-<img src="./media/image2.png" style="width:5.775in;height:3.43909in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image2.png" style="width:5.775in;height:3.43909in" />
 
 We can conclude that both (.**text** , **.rsrc**) are packed
 
@@ -71,7 +39,7 @@ At first let’s start analyzing this file using **dnspy**
 
 ## **Resources**
 
-<img src="./media/image3.png" style="width:3.50049in;height:0.90638in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image3.png" style="width:3.50049in;height:0.90638in" />
 
 The first interesting things we can observe from this image are
 “**Costura**” & “**compressed**” strings!
@@ -87,7 +55,7 @@ So, the first question we should ask ourselves. What is **Costura**?
 
 By opening “**Campos.properties.resources**” resource we can find
 
-<img src="./media/image4.png" style="width:3.16667in;height:0.55208in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image4.png" style="width:3.16667in;height:0.55208in" />
 
 -   As we clarified before they are compressed so there is no reason to
     check them. But as a head up the malware maybe reside in one of
@@ -98,17 +66,17 @@ By opening “**Campos.properties.resources**” resource we can find
 
 ## Execution analysis
 
-<img src="./media/image5.png" style="width:4.40872in;height:0.90008in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image5.png" style="width:4.40872in;height:0.90008in" />
 
-<img src="./media/image6.png" style="width:4.98377in;height:1.64181in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image6.png" style="width:4.98377in;height:1.64181in" />
 
-<img src="./media/image7.png" style="width:5.47547in;height:4.05869in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image7.png" style="width:5.47547in;height:4.05869in" />
 
-<img src="./media/image8.png" style="width:6.5in;height:0.62292in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image8.png" style="width:6.5in;height:0.62292in" />
 
-<img src="./media/image9.png" style="width:5.92791in;height:0.23962in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image9.png" style="width:5.92791in;height:0.23962in" />
 
-<img src="./media/image10.png" style="width:5.09211in;height:1.39179in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image10.png" style="width:5.09211in;height:1.39179in" />
 
 1.  We can see there that it accesses the resource
     (**MainWindow.nabexx + MainWindow.nabexx+ MainWindow.nabexx == “XX”
@@ -142,19 +110,19 @@ new_file.close()
 
 Continuing the analysis
 
-<img src="./media/image11.png" style="width:6.16667in;height:2.07292in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image11.png" style="width:6.16667in;height:2.07292in" />
 
-<img src="./media/image12.png" style="width:5.4375in;height:4.28125in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image12.png" style="width:5.4375in;height:4.28125in" />
 
 It looks like it calls function **X** from **Class1** passing the
 **loaded assembly** on it
 
-<img src="./media/image13.png" style="width:6.5in;height:2.35in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image13.png" style="width:6.5in;height:2.35in" />
 
 Then it invokes the first method on the loaded assembly.by adding a
 watch on **X.getMethods()\[0\]**
 
-<img src="./media/image14.png" style="width:6.5in;height:0.54653in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image14.png" style="width:6.5in;height:0.54653in" />
 
 It looks like that it invoked Function Void X() on X class on the loaded
 assembly
@@ -167,7 +135,7 @@ Let’s go through extracted and loaded file analysis
 
 using **PE-Studio**
 
-<img src="./media/image15.png" style="width:6.11667in;height:3.15in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image15.png" style="width:6.11667in;height:3.15in" />
 
 It looks like
 
@@ -179,7 +147,7 @@ It looks like
 
 By using **DIE** to analyze each section entropy
 
-<img src="./media/image16.png" style="width:5.35in;height:3.22829in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image16.png" style="width:5.35in;height:3.22829in" />
 
 We can conclude that both .**text** section is packed
 
@@ -189,7 +157,7 @@ At first let’s start analyzing this file using **dnspy**
 
 ## **Resources**
 
-<img src="./media/image17.png" style="width:2.50035in;height:0.7501in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image17.png" style="width:2.50035in;height:0.7501in" />
 
 As we have concluded before in the previous sample, it could be using
 the same technique and there is something packed on these resources and
@@ -200,7 +168,7 @@ it decrypts it then it is loaded into memory.
 As we have concluded in the previous section, Function **Void X()** in
 class **X** was executed
 
-<img src="./media/image18.png" style="width:4.95833in;height:1.14583in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image18.png" style="width:4.95833in;height:1.14583in" />
 
 It passes the executed file to the main function resided in **LOL**
 class
@@ -208,16 +176,16 @@ class
 **  
 **
 
-<img src="./media/image19.png" style="width:6.5in;height:3.63889in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image19.png" style="width:6.5in;height:3.63889in" />
 
-<img src="./media/image20.png" style="width:1.78125in;height:0.32292in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image20.png" style="width:1.78125in;height:0.32292in" />
 
 For the second time, It it decrypting a resources and loading it them to
 memory the memory, But life is too short to trace both unpacking
 functions .so, We are going to replicated this code snippet into
 compiler and extract both files writing them to disk
 
-<img src="./media/image21.png" style="width:6.5in;height:2.51319in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image21.png" style="width:6.5in;height:2.51319in" />
 
 # Analyzing Second file
 
@@ -225,7 +193,7 @@ compiler and extract both files writing them to disk
 
 using **PE-Studio**
 
-<img src="./media/image22.png" style="width:6.5in;height:3.86667in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image22.png" style="width:6.5in;height:3.86667in" />
 
 It looks like
 
@@ -235,9 +203,9 @@ It looks like
 
 By using **DIE** to
 
-<img src="./media/image23.png" style="width:6.5in;height:1.15833in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image23.png" style="width:6.5in;height:1.15833in" />
 
-<img src="./media/image24.png" style="width:4.84524in;height:2.81604in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image24.png" style="width:4.84524in;height:2.81604in" />
 
 It looks like
 
@@ -249,7 +217,7 @@ It looks like
 
 At first let’s start analyzing this file using **dnspy**
 
-<img src="./media/image25.png" style="width:6.5in;height:2.96597in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image25.png" style="width:6.5in;height:2.96597in" />
 
 By checking the main function there, it looks that this DLL is loaded
 before the actual malware unpacking, to check for active antiviruses and
@@ -261,7 +229,7 @@ use it to avoid original malware detection
 
 using **PE-Studio**
 
-<img src="./media/image26.png" style="width:6.5in;height:4.64028in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image26.png" style="width:6.5in;height:4.64028in" />
 
 It looks like
 
@@ -273,6 +241,6 @@ It looks like
 
 By using **DIE** to analyze each section entropy
 
-<img src="./media/image27.png" style="width:4.93452in;height:3.01238in" />
+<img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image27.png" style="width:4.93452in;height:3.01238in" />
 
 Then finally this is the unpacked malware

@@ -11,211 +11,268 @@ image:
   width: 850
   height: 585
 ---
+# Table of Contents
 
-This post is to show Markdown syntax rendering on [**Chirpy**](https://github.com/cotes2020/jekyll-theme-chirpy/fork), you can also use it as an example of writing. Now, let's start looking at text and typography.
+[Initial assessment 2](#initial-assessment)
 
+[Analysis 3](#analysis)
 
-## Titles
----
-# H1 - heading
+[Resources 3](#resources)
 
-<h2 data-toc-skip>H2 - heading</h2>
+[Execution analysis 4](#execution-analysis)
 
-<h3 data-toc-skip>H3 - heading</h3>
+[Extracted file Analysis 7](#extracted-file-analysis)
 
-<h4>H4 - heading</h4>
----
-<br>
+[File initial assessment 7](#file-initial-assessment)
 
-## Paragraph
+[Analysis 8](#analysis-1)
 
-I wandered lonely as a cloud
+[Resources 8](#resources-1)
 
-That floats on high o'er vales and hills,
+[Execution analysis 8](#execution-analysis-1)
 
-When all at once I saw a crowd,
+[Analyzing Second file 10](#analyzing-second-file)
 
-A host, of golden daffodils;
+[File initial assessment 10](#file-initial-assessment-1)
 
-Beside the lake, beneath the trees,
+[Analysis 11](#analysis-2)
 
-Fluttering and dancing in the breeze.
+[Analyzing third file 13](#analyzing-third-file)
 
-## Lists
+[File initial assessment 13](#file-initial-assessment-2)
 
-### Ordered list
+**  
+**
 
-1. Firstly
-2. Secondly
-3. Thirdly
+# Initial assessment
 
-### Unordered list
+At Malware initial assessment using **PE-Studio**
 
-- Chapter
-	- Section
-      - Paragraph
+<img src="./media/image1.png" style="width:6.5in;height:2.78681in" />
 
-### Task list
+It looks like
 
-- [ ] TODO
-- [x] Completed
-- [ ] Defeat COVID-19
-  - [x] Vaccine production
-  - [ ] Economic recovery
-  - [ ] People smile again
+-   This sample is **.NET** sample
 
-### Description list
+-   This sample contains the magic byte “**MZ**” which means it’s
+    executable
 
-Sun
-: the star around which the earth orbits
+-   Follows **x32** architecture
 
-Moon
-: the natural satellite of the earth, visible by reflected light from the sun
+By using **DIE** to analyze each section entropy
 
+<img src="./media/image2.png" style="width:5.775in;height:3.43909in" />
 
-## Block Quote
+We can conclude that both (.**text** , **.rsrc**) are packed
 
-> This line to shows the Block Quote.
+# Analysis
 
-## Tables
+At first let’s start analyzing this file using **dnspy**
 
-| Company                      | Contact          | Country |
-|:-----------------------------|:-----------------|--------:|
-| Alfreds Futterkiste          | Maria Anders     | Germany |
-| Island Trading               | Helen Bennett    | UK      |
-| Magazzini Alimentari Riuniti | Giovanni Rovelli | Italy   |
+## **Resources**
 
-## Links
+<img src="./media/image3.png" style="width:3.50049in;height:0.90638in" />
 
-<http://127.0.0.1:4000>
+The first interesting things we can observe from this image are
+“**Costura**” & “**compressed**” strings!
 
+So, the first question we should ask ourselves. What is **Costura**?
 
-## Footnote
+> **Costura** is an addon responsible for **Embedding dependencies as
+> resources** on extensible tool for weaving .net assemblies called
+> **Fody,** it is also loads itself with the same technique. After,
+> reaching it’s github project <https://github.com/Fody/Costura> they
+> also clarified that “**Embedded assemblies are compressed by
+> default**” so “**compressed**” string makes sense now.
 
-Click the hook will locate the footnote[^footnote], and here is another footnote[^fn-nth-2].
+By opening “**Campos.properties.resources**” resource we can find
 
+<img src="./media/image4.png" style="width:3.16667in;height:0.55208in" />
 
-## Images
+-   As we clarified before they are compressed so there is no reason to
+    check them. But as a head up the malware maybe reside in one of
+    them.
 
-- Default (with caption)
+-   So, we should keep track of decompression/decryption and assembly
+    loading functions to be able to unpack it.
 
-![Desktop View](https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190808/mockup.png){: width="972" height="589" }
-_Full screen width and center alignment_
+## Execution analysis
 
-<br>
+<img src="./media/image5.png" style="width:4.40872in;height:0.90008in" />
 
-- Shadow
+<img src="./media/image6.png" style="width:4.98377in;height:1.64181in" />
 
-![Window shadow](https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190808/window.png){: .shadow width="1548" height="864" style="max-width: 90%" }
-_shadow effect (visible in light mode)_
+<img src="./media/image7.png" style="width:5.47547in;height:4.05869in" />
 
-<br>
+<img src="./media/image8.png" style="width:6.5in;height:0.62292in" />
 
-- Left aligned
+<img src="./media/image9.png" style="width:5.92791in;height:0.23962in" />
 
-![Desktop View](https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190808/mockup.png){: width="972" height="589" style="max-width: 70%" .normal}
+<img src="./media/image10.png" style="width:5.09211in;height:1.39179in" />
 
-<br>
+1.  We can see there that it accesses the resource
+    (**MainWindow.nabexx + MainWindow.nabexx+ MainWindow.nabexx == “XX”
+    +”XX” + “XX” == “XXXXXX”**)
 
-- Float to left
+2.  It decrypts it using **AES** algorithm using the resource (**XX**)
+    as key
 
-  ![Desktop View](https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190808/mockup.png){: width="972" height="589" style="max-width: 200px" .left}
-  "A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space."
+3.  Then it loads it into the memory
 
-<br>
+By extracting the two resources (**XX**, **XXXXXX**) and using this
+simple python script, we can check what is loaded into the memory.
 
-- Float to right
+from Cryptodome.Cipher import AES
 
-  ![Desktop View](https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190808/mockup.png){: width="972" height="589" style="max-width: 200px" .right}
-  "A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space. A repetitive and meaningless text is used to fill the space."
+fk = open("XX", "rb")
 
-<br>
+key = fk.read()
 
-## Mermaid SVG
+bf = open("XXXXXX", "rb")
 
-```mermaid
- gantt
-  title  Adding GANTT diagram functionality to mermaid
-  apple :a, 2017-07-20, 1w
-  banana :crit, b, 2017-07-23, 1d
-  cherry :active, c, after b a, 1d
-```
+file = bf.read()
 
+cipher = AES.new(key, AES.MODE_ECB)
 
-## Mathematics
+new_file = open("file" , "wb")
 
-The mathematics powered by [**MathJax**](https://www.mathjax.org/):
+new_file.write(cipher.decrypt(file))
 
-$$ \sum_{n=1}^\infty 1/n^2 = \frac{\pi^2}{6} $$
+new_file.close()
 
-When $a \ne 0$, there are two solutions to $ax^2 + bx + c = 0$ and they are
+Continuing the analysis
 
-$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
+<img src="./media/image11.png" style="width:6.16667in;height:2.07292in" />
 
+<img src="./media/image12.png" style="width:5.4375in;height:4.28125in" />
 
-## Inline code
+It looks like it calls function **X** from **Class1** passing the
+**loaded assembly** on it
 
-This is an example of `Inline Code`.
+<img src="./media/image13.png" style="width:6.5in;height:2.35in" />
 
+Then it invokes the first method on the loaded assembly.by adding a
+watch on **X.getMethods()\[0\]**
 
-## Code block
+<img src="./media/image14.png" style="width:6.5in;height:0.54653in" />
 
-### Common
+It looks like that it invoked Function Void X() on X class on the loaded
+assembly
 
-```
-This is a common code snippet, without syntax highlight and line number.
-```
+Let’s go through extracted and loaded file analysis
 
-### Specific Languages
+# Extracted file Analysis
 
-#### Console
+## **File initial assessment**
 
-```console
-$ env |grep SHELL
-SHELL=/usr/local/bin/bash
-PYENV_SHELL=bash
-```
+using **PE-Studio**
 
-#### Ruby
+<img src="./media/image15.png" style="width:6.11667in;height:3.15in" />
 
-```ruby
-def sum_eq_n?(arr, n)
-  return true if arr.empty? && n == 0
-  arr.product(arr).reject { |a,b| a == b }.any? { |a,b| a + b == n }
-end
-```
+It looks like
 
-#### Shell
+-   This sample is **.NET** sample
 
-```shell
-if [ $? -ne 0 ]; then
-    echo "The command was not successful.";
-    #do the needful / exit
-fi;
-```
+-   This sample contains the magic byte “**MZ**”, file type is **DLL**
 
-#### Liquid
+-   Follows **x32** architecture
 
-{% raw %}
-```liquid
-{% if product.title contains 'Pack' %}
-  This product's title contains the word Pack.
-{% endif %}
-```
-{% endraw %}
+By using **DIE** to analyze each section entropy
 
-#### Java
+<img src="./media/image16.png" style="width:5.35in;height:3.22829in" />
 
-```java
-private void writeObject(java.io.ObjectOutputStream s)
-  throws java.io.IOException {
-  // Write out any hidden serialization magic
-  s.defaultWriteObject();
-  for (E e: map.keySet()) s.writeObject(e);
-}
-```
+We can conclude that both .**text** section is packed
 
-## Reverse Footnote
+# Analysis
 
-[^footnote]: The footnote source
-[^fn-nth-2]: The 2nd footnote source
+At first let’s start analyzing this file using **dnspy**
+
+## **Resources**
+
+<img src="./media/image17.png" style="width:2.50035in;height:0.7501in" />
+
+As we have concluded before in the previous sample, it could be using
+the same technique and there is something packed on these resources and
+it decrypts it then it is loaded into memory.
+
+## Execution analysis
+
+As we have concluded in the previous section, Function **Void X()** in
+class **X** was executed
+
+<img src="./media/image18.png" style="width:4.95833in;height:1.14583in" />
+
+It passes the executed file to the main function resided in **LOL**
+class
+
+**  
+**
+
+<img src="./media/image19.png" style="width:6.5in;height:3.63889in" />
+
+<img src="./media/image20.png" style="width:1.78125in;height:0.32292in" />
+
+For the second time, It it decrypting a resources and loading it them to
+memory the memory, But life is too short to trace both unpacking
+functions .so, We are going to replicated this code snippet into
+compiler and extract both files writing them to disk
+
+<img src="./media/image21.png" style="width:6.5in;height:2.51319in" />
+
+# Analyzing Second file
+
+## **File initial assessment**
+
+using **PE-Studio**
+
+<img src="./media/image22.png" style="width:6.5in;height:3.86667in" />
+
+It looks like
+
+-   This sample contains the magic byte “**MZ**”, file type is **DLL**
+
+-   Follows **x32** architecture
+
+By using **DIE** to
+
+<img src="./media/image23.png" style="width:6.5in;height:1.15833in" />
+
+<img src="./media/image24.png" style="width:4.84524in;height:2.81604in" />
+
+It looks like
+
+-   It’s **.NET** sample
+
+-   This file is not packed
+
+# Analysis
+
+At first let’s start analyzing this file using **dnspy**
+
+<img src="./media/image25.png" style="width:6.5in;height:2.96597in" />
+
+By checking the main function there, it looks that this DLL is loaded
+before the actual malware unpacking, to check for active antiviruses and
+use it to avoid original malware detection
+
+# Analyzing third file
+
+## **File initial assessment**
+
+using **PE-Studio**
+
+<img src="./media/image26.png" style="width:6.5in;height:4.64028in" />
+
+It looks like
+
+-   This sample is **C++** sample
+
+-   This sample contains the magic byte “**MZ**”, and it’s executable
+
+-   Follows **x32** architecture
+
+By using **DIE** to analyze each section entropy
+
+<img src="./media/image27.png" style="width:4.93452in;height:3.01238in" />
+
+Then finally this is the unpacked malware

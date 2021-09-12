@@ -89,7 +89,7 @@ By opening “**Campos.properties.resources**” resource we can find
 
 By extracting the two resources (**XX**, **XXXXXX**) and using this
 simple python script, we can check what is loaded into the memory.
-
+```python
 from Cryptodome.Cipher import AES
 
 fk = open("XX", "rb")
@@ -107,7 +107,7 @@ new_file = open("file" , "wb")
 new_file.write(cipher.decrypt(file))
 
 new_file.close()
-
+```
 Continuing the analysis
 
 <img src="https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/image11.png?raw=true" style="width:6.16667in;height:2.07292in" />

@@ -48,7 +48,7 @@ image:
 
 At Malware initial assessment using **PE-Studio**
 
-<img src="./media/image1.png" style="width:6.5in;height:2.78681in" />
+<img src="![]({{ site.baseurl }}/media/image1.png" style="width:6.5in;height:2.78681in" />
 
 It looks like
 

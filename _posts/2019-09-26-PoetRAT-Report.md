@@ -58,7 +58,7 @@ possibilities to (**doc, xls, ppt**) extensions
 
 # Virus Total scan
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image1.png){width="3.998611111111111in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image1.png?raw=true){width="3.998611111111111in"
 height="5.053030402449694in"}
 
 After virus total scan as it appears that its Microsoft word file
@@ -69,7 +69,7 @@ behaves as Downloader & dropper so apparently it has macro
 Using **any.run** service it was found that Microsoft word process is
 opening 3 CMD to execute python scripts.
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image2.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image2.png?raw=true){width="6.5in"
 height="4.403472222222222in"}
 
 # 
@@ -78,7 +78,7 @@ height="4.403472222222222in"}
 
 By using **ViperMonkey** I was able to extract the VBA macros
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image3.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image3.png?raw=true){width="6.5in"
 height="3.213888888888889in"}
 
 # Extracted VBA macro
@@ -563,12 +563,12 @@ on the wild.
 
 Looked at **shodan.io** but no info was found about this host
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image4.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image4.png?raw=true){width="6.5in"
 height="0.7458333333333333in"}
 
 Looked at **securitytrails** to check for history of DNS records
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image5.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image5.png?raw=true){width="6.5in"
 height="1.229861111111111in"}
 
 It looks like year ago it was pointing to **hostkey** hosting service
@@ -587,33 +587,26 @@ the malware to steal their money.
 1.  **Sample1, docer.doc**\
     SHA256
     208EC23C233580DBFC53AAD5655845F7152ADA56DD6A5C780D54E84A9D227407
-
 2.  **smile.zip**\
     SHA256
     FA97AE75665B2C16100EF7529BBD3C08861E4CA27BF27453F6B668AE77D1692E
-
 3.  **launcher.py**\
     SHA256
     5F1C268826EC0DD0ACA8C89AB63A8A1DE0B4E810DED96CDEE4B28108F3476CE7
-
 4.  **frown.py\
     **SHA256
     D4B7E4870795E6F593C9B3143E2BA083CF12AC0C79D2DD64B869278B0247C247
-
 5.  **smile.py\
     **SHA256
     252C5D491747A42175C7C57CCC5965E3A7B83EB5F964776EF108539B0A29B2EE**\
     **
-
 6.  **smile_funs.py**\
     SHA256
     312F54943EBFD68E927E9AA95A98CA6F2D3572BF99DA6B448C5144864824C04D
-
 7.  **backer.py\
     **SHA256
     CA8492139C556EAC6710FE73BA31B53302505A8CC57338E4D2146BDFA8F69BDB**\
     **
-
 8.  **affine.py\
     **SHA256
     B1E7DC16E24EBEB60BC6753C54E940C3E7664E9FCB130BD663129ECDB5818FCD**\

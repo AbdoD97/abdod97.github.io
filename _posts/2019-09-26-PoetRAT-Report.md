@@ -7,7 +7,7 @@ tags: [dropper,macro,obfuscated-macro,rat,python]
 math: false
 mermaid: true
 image:
-  src: https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/Untitled-3.jpg?raw=true
+  src: https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/PoetRAT-blog.jpg?raw=true
   width: 850
   height: 585
 ---
@@ -26,6 +26,8 @@ systems related to wind turbines.**
 
 **Attachments: Malware dropped archive including malicious python
 scripts (Pw:infected)**
+
+[https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/password%20infected.rar](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/password%20infected.rar)
 
 **Sample Information**
 
@@ -58,7 +60,7 @@ possibilities to (**doc, xls, ppt**) extensions
 
 # Virus Total scan
 
-![](./PoetRAT/media/image1.png){width="3.998611111111111in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image1.png){width="3.998611111111111in"
 height="5.053030402449694in"}
 
 After virus total scan as it appears that its Microsoft word file
@@ -69,7 +71,7 @@ behaves as Downloader & dropper so apparently it has macro
 Using **any.run** service it was found that Microsoft word process is
 opening 3 CMD to execute python scripts.
 
-![](./PoetRAT/media/image2.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image2.png){width="6.5in"
 height="4.403472222222222in"}
 
 # 
@@ -78,7 +80,7 @@ height="4.403472222222222in"}
 
 By using **ViperMonkey** I was able to extract the VBA macros
 
-![](./PoetRAT/media/image3.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image3.png){width="6.5in"
 height="3.213888888888889in"}
 
 # Extracted VBA macro
@@ -576,12 +578,12 @@ on the wild.
 
 Looked at **shodan.io** but no info was found about this host
 
-![](./PoetRAT/media/image4.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image4.png){width="6.5in"
 height="0.7458333333333333in"}
 
 Looked at **securitytrails** to check for history of DNS records
 
-![](./PoetRAT/media/image5.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image5.png){width="6.5in"
 height="1.229861111111111in"}
 
 It looks like year ago it was pointing to **hostkey** hosting service

@@ -540,31 +540,18 @@ executing built-in commands.
 # Malware capabilities
 
 1.  Listing files (**ls**)
-
 2.  Work and change directories (**cd**)
-
 3.  Getting system info
-
 4.  Downloading files (Using FTP protocol)
-
 5.  Uploading files
-
 6.  Taking and uploading screenshot
-
 7.  Copying files
-
 8.  Moving files
-
 9.  Creating shortcuts like (Links)
-
 10. Manipulating registry
-
 11. Hiding files
-
 12. Compressing files
-
 13. Manipulating processes
-
 14. Executing any **cmd** commands
 
 # Further investigation on the host
@@ -638,23 +625,14 @@ the malware to steal their money.
 ## **Files**
 
 1.  C:\\Users\\Public\\smile.zip
-
 2.  C:\\Users\\Public\\docer.doc
-
 3.  C:\\Users\\Public\\Python37\\launcher.py
-
 4.  C:\\Users\\Public\\Python37\\frown.py
-
 5.  C:\\Users\\Public\\Python37\\smile.py
-
 6.  C:\\Users\\Public\\Python37\\smile_funs.py
-
 7.  C:\\Users\\Public\\Python37\\backer.py
-
 8.  C:\\Users\\Public\\Python37\\affine.py
-
 9.  C:\\Users\\Public\\Python37\\.key
-
 10. C:\\Users\\Public\\Python37\\.ready
 
 ## **Hosts**

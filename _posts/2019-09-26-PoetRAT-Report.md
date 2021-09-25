@@ -13,33 +13,26 @@ image:
 ---
 **Document info**
 
-**Sample Name: PoetRAT**
+Sample Name: PoetRAT
 
 **Description:**
 
-**Python RAT uses COVID-19 document lures to target Azerbaijan public
-and private sectors.**
-
-**Azerbaijan government and energy sector likely targeted by an unknown
+Python RAT uses COVID-19 document lures to target Azerbaijan public
+and private sectors.
+Azerbaijan government and energy sector likely targeted by an unknown
 actor. From the energy sector, the actor demonstrates interest in SCADA
-systems related to wind turbines.**
-
-**Attachments: Malware dropped archive including malicious python
-scripts (Pw:infected)**
+systems related to wind turbines.
+Attachments: Malware dropped archive including malicious python scripts (Pw:infected)
 
 [https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/password%20infected.rar](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/password%20infected.rar)
 
 **Sample Information**
 
-**SHA256:208EC23C233580DBFC53AAD5655845F7152ADA56DD6A5C780D54E84A9D227407**
-
-**MD5:3AADBF7E527FC1A050E1C97FEA1CBA4D**
-
-**SHA1:2CF055B3EF60582CA72E77BC4693EA306360F611**
-
-**Version: 4**
-
-**Sample Type: Trojan dropper, Remote Administration Tool (RAT)**
+SHA256:208EC23C233580DBFC53AAD5655845F7152ADA56DD6A5C780D54E84A9D227407
+MD5:3AADBF7E527FC1A050E1C97FEA1CBA4D
+SHA1:2CF055B3EF60582CA72E77BC4693EA306360F611
+Version: 4
+Sample Type: Trojan dropper, Remote Administration Tool (RAT)
 
 **Executive Summary**
 

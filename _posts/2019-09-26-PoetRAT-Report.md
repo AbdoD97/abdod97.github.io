@@ -66,7 +66,7 @@ behaves as Downloader & dropper so apparently it has macro
 # Dynamic analysis using sandbox
 
 Using **any.run** service it was found that Microsoft word process is
-opening 3 CMD to execute python scripts.
+opening 3 CMD to execute python scripts dropped by the document.
 
 ![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image2.png?raw=true)
 # 

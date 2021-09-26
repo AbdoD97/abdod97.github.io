@@ -259,9 +259,9 @@ If there are **no arguments passed**
 
 -   It launches both "**Smile.py, Frown.py"** files.
 
-This function is basically launched under two cases, the first one is
-**passing argument "Police"** or continuing the flow of the script
-**after writing ".key" file**.
+-   This function is basically launched under two cases, the first one is
+    **passing argument "Police"** or continuing the flow of the script
+    **after writing ".key" file**.
 
 ## **Smile.py** 
 ```python

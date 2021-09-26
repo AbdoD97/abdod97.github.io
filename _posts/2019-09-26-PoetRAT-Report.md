@@ -58,8 +58,7 @@ possibilities to (**doc, xls, ppt**) extensions
 
 # Virus Total scan
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image1.png?raw=true){width="3.998611111111111in"
-height="5.053030402449694in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image1.png?raw=true)
 
 After virus total scan as it appears that its Microsoft word file
 behaves as Downloader & dropper so apparently it has macro
@@ -69,17 +68,14 @@ behaves as Downloader & dropper so apparently it has macro
 Using **any.run** service it was found that Microsoft word process is
 opening 3 CMD to execute python scripts.
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image2.png?raw=true){width="6.5in"
-height="4.403472222222222in"}
-
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image2.png?raw=true)
 # 
 
 # Macro extraction
 
 By using **ViperMonkey** I was able to extract the VBA macros
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image3.png?raw=true){width="6.5in"
-height="3.213888888888889in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image3.png?raw=true)
 
 # Extracted VBA macro
 
@@ -563,13 +559,11 @@ on the wild.
 
 Looked at **shodan.io** but no info was found about this host
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image4.png?raw=true){width="6.5in"
-height="0.7458333333333333in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image4.png?raw=true)
 
 Looked at **securitytrails** to check for history of DNS records
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image5.png?raw=true){width="6.5in"
-height="1.229861111111111in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image5.png?raw=true)
 
 It looks like year ago it was pointing to **hostkey** hosting service
 which apparently was hosting the C&C server. Also, by doing a reverse IP

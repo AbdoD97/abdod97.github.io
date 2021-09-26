@@ -13,7 +13,7 @@ image:
 ---
 **Document info**
 
-Sample Name: PoetRAT
+**Sample Name:** PoetRAT
 
 **Description:**
 

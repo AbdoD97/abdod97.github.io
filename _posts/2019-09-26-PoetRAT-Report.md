@@ -80,7 +80,7 @@ By using **ViperMonkey** I was able to extract the VBA macros
 ![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/PoetRAT/media/image3.png?raw=true)
 
 # Extracted VBA macro
-```vbscript
+```vbnet
 from vb2py.vbfunctions import *
 from vb2py.vbdebug import *
 def document_open():

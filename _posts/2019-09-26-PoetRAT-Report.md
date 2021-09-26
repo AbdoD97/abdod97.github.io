@@ -13,12 +13,6 @@ image:
 ---
 **Document info**
 
-**Sample Name:**
-
-PoetRAT
-
-**Description:**
-
 Python RAT uses COVID-19 document lures to target Azerbaijan public and private sectors.
 
 Azerbaijan government and energy sector likely targeted by an unknown actor. 

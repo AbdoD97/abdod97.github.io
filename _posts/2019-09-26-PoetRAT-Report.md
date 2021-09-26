@@ -175,13 +175,14 @@ Then it executes "**bin2var**" function which extracts the latest
 "**7074638 Bytes**" from the document and creates "**smile.zip**", So
 this python script can be used to extract the zip file from the document
 ```python
-f = open(\'Sample1\', \'rb\')
+f = open('Sample1', 'rb')
 content = f.read()
-zip_file = content\[len(content)-7074638:len(content)\]
-z= open(\'Sample.zip\',\'wb\')
+zip_file = content[len(content)-7074638:len(content)]
+z= open('Sample.zip','wb')
 z.write(zip_file)
 f.close()
 z.close()
+
 ```
 then it unzips it into "**C:\\Users\\Public\\ Python37**", Apparently
 the extracted files are **python version 3.7** and some **malicious

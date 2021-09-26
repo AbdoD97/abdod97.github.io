@@ -1101,8 +1101,7 @@ It looks like year ago it was pointing to **hostkey** hosting service
 which apparently was hosting the C&C server. Also, by doing a reverse IP
 lookup against these IPs it looks like that one of them pointed to this
 **cryptosuccesstrade.com** website, which was a fishy cryptocurrency
-investing platform. Maybe they were tricking users somehow to download
-the malware to steal their money.
+investing platform. Maybe they were using it as a camouflage. Who knows!
 
 [https://web.archive.org/web/20200509181348/http://cryptosuccesstrade.com/](https://web.archive.org/web/20200509181348/http:/cryptosuccesstrade.com/)
 

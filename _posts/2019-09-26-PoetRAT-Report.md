@@ -11,7 +11,6 @@ image:
   width: 850
   height: 585
 ---
-**Document info**
 
 Python RAT uses COVID-19 document lures to target Azerbaijan public and private sectors.
 

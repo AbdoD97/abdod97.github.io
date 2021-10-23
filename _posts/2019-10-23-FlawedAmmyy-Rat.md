@@ -1,13 +1,13 @@
 ---
 title: FlawedAmmyy Rat
 author: Abdelrahman Eldawi
-date: 2021-10-23 19:33:00 +0800
+date: 2021-10-23 14:33:00 +0800
 categories: [malware-reports]
 tags: [malware-unpacking,unpacking]
 math: false
 mermaid: true
 image:
-  src: https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/FlawedAmmyy-RAT.png?raw=true
+  src: https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/FlawedAmmyy-RAT.png?raw=true?raw=true
   width: 850
   height: 585
 ---
@@ -40,14 +40,14 @@ At Malware initial assessment using **Pestudio** and **DIE (Detect it
 easy),** it was found that the sample is **Windows Exe (x86-32)** and it
 has **(Microsoft Visual C/C++(6.0))** compiler stamp
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image1.png){width="5.628788276465442in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image1.png?raw=true){width="5.628788276465442in"
 height="2.626768372703412in"}
 
 By analyzing the entropy of file sections, it looks like there is
 appended part on the exe (**Overlay)** that is packed and indirectly
 loaded after the malware is executed
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image2.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image2.png?raw=true){width="6.5in"
 height="4.486111111111111in"}
 
 ## Unpacking
@@ -55,7 +55,7 @@ height="4.486111111111111in"}
 To unpack the file, I used **Unpac.me** online service and it was able
 to extract the unpacked child
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image3.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image3.png?raw=true){width="6.5in"
 height="2.092361111111111in"}
 
 **Unpacked Sample basic information**
@@ -66,7 +66,7 @@ SHA1: 67fc3717e0ea134599633e1e7e8daf6cc0857f99
 
 ## Imports
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image4.png){width="6.34375in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image4.png?raw=true){width="6.34375in"
 height="4.895833333333333in"}
 
 We can find lots of interesting API calls which is able to **manipulate
@@ -78,8 +78,8 @@ If we examine the strings of malware, we can identify a lot of malicious
 strings that give us information about the behavior of the malware and
 what it tries to do on a system.
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image5.png){width="5.145833333333333in"
-height="2.375in"}![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image6.png){width="2.3958333333333335in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image5.png?raw=true){width="5.145833333333333in"
+height="2.375in"}![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image6.png?raw=true){width="2.3958333333333335in"
 height="1.7395833333333333in"}
 
 These strings are combination of CMD commands, URL, System Paths, Files.
@@ -96,21 +96,21 @@ And some interested paths and files
 Using **any.run** service it was found that the malware is querying the
 domain controller for the machine, then it deletes itself.
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image7.png){width="4.757575459317585in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image7.png?raw=true){width="4.757575459317585in"
 height="2.4052187226596677in"}
 
 Looking at HTTP requests, it tried to download a file but the server
 didn't respond, so this clarifies why it deleted itself from the system
 at the first place
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image8.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image8.png?raw=true){width="6.5in"
 height="1.2090277777777778in"}
 
 # Analysis part
 
 \*All functions were renamed by me to easy explanations
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image9.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image9.png?raw=true){width="6.5in"
 height="3.526388888888889in"} The first variable v18 is calling a
 function to get the Major & Minor version of the windows in order to
 identify the windows version
@@ -131,7 +131,7 @@ compliment, one of them will be TRUE
 
 ## Delete_wsus_exe function
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image10.png){width="4.875in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image10.png?raw=true){width="4.875in"
 height="2.1666666666666665in"}
 
 At first it executes (**SHGetSpecialFolderPathA**) it retrieves the path
@@ -149,18 +149,18 @@ running.
 **This function wasn't called directly, But it was dynamically resolved
 and this how it looked like**
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image11.png){width="2.9583333333333335in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image11.png?raw=true){width="2.9583333333333335in"
 height="0.8229166666666666in"}
 
 **After tracing inside this function**
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image12.png){width="4.520833333333333in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image12.png?raw=true){width="4.520833333333333in"
 height="1.09375in"}
 
 By setting a breakpoint on the return of the **(sub_401540)** and
 checking the return value we can find that
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image13.png){width="4.427083333333333in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image13.png?raw=true){width="4.427083333333333in"
 height="0.8333333333333334in"}
 
 It loaded Shell32_IsUserAnAdmin
@@ -169,7 +169,7 @@ Then it checks whether the malware was executed with an admin privilege
 
 ## Terminate process function
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image14.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image14.png?raw=true){width="6.5in"
 height="3.448611111111111in"}
 
 As it appears it takes a snapshot of processes already running and loop
@@ -208,7 +208,7 @@ old instances cleaning ***\*\*?? refers to the (guid.Part3 + guid.Part1
 
 Let's continue with the code
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image15.png){width="6.100528215223097in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image15.png?raw=true){width="6.100528215223097in"
 height="2.900251531058618in"}
 
 As we can see **file_downloader_write** is called and it's the function
@@ -218,10 +218,10 @@ function as **highlighted is the reference for the URL**
 
 ## file_downloader_write 
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image16.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image16.png?raw=true){width="6.5in"
 height="3.4458333333333333in"}
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image17.png){width="4.727272528433946in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image17.png?raw=true){width="4.727272528433946in"
 height="1.0634426946631672in"}
 
 It loads the lib "**wininet.dll**" then "**InternetReadFile ,
@@ -239,7 +239,7 @@ Then I used Python **SimpleHTTPServer** to serve the file.
 
 python -m SimpleHTTPServer 80
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image18.png){width="3.0694444444444446in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image18.png?raw=true){width="3.0694444444444446in"
 height="3.0555555555555554in"}
 
 Then the file was opened and handle was passed to "**hfile**"
@@ -256,7 +256,7 @@ catching it in the way, So it decrypts it in house to be able to use it
 
 The decryption key used in the function is "Porow2uj548423"
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image19.png){width="6.5in" height="1.5375in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image19.png?raw=true){width="6.5in" height="1.5375in"}
 
 ### 
 
@@ -290,7 +290,7 @@ The decryption key used in the function is "Porow2uj548423"
 
 ### Create the decoding array function
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image20.png){width="6.4947845581802275in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image20.png?raw=true){width="6.4947845581802275in"
 height="3.5984853455818024in"}
 
 Then how is this working?
@@ -313,7 +313,7 @@ The variable **v8** keeps increasing till it reaches the (**secret
 key**) length then it's set to 0 again, after it ends, the decoding
 matrix constructed from the word should be like the illustration below
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image21.png){width="5.037878390201225in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image21.png?raw=true){width="5.037878390201225in"
 height="1.8287018810148732in"}
 
 ### Decryption function
@@ -326,7 +326,7 @@ passed into the first function**
 
 **Sub_4126E0**
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image22.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image22.png?raw=true){width="6.5in"
 height="2.435416666666667in"}
 
 **v5, v6 , v7 are int8 so their max num is 256 then it overflows and
@@ -350,7 +350,7 @@ decoding_arr\[decoding_arr\[v6\]+decoding_array\[v7\]\]**
 
 ## Returning back to main function analysis
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image23.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image23.png?raw=true){width="6.5in"
 height="3.472916666666667in"}
 
 Then it checks whether the decryption was done correctly or not by
@@ -368,9 +368,9 @@ If it has admin privilege then it will continue to the next function.
 
 ## Persistence function
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image24.png){width="6.5in" height="3.45625in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image24.png?raw=true){width="6.5in" height="3.45625in"}
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image25.png){width="6.5in"
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image25.png?raw=true){width="6.5in"
 height="0.6048611111111111in"}
 
 At first it resolves "**SHGetSpecialFolderPathW**" api using its ordinal

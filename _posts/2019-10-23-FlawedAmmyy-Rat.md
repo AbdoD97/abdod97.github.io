@@ -1,7 +1,7 @@
 ---
 title: FlawedAmmyy Rat
 author: Abdelrahman Eldawi
-date: 2021-10-23 14:33:00 +0800
+date: 2021-10-23 19:33:00 +0800
 categories: [malware-reports]
 tags: [malware-unpacking,unpacking]
 math: false

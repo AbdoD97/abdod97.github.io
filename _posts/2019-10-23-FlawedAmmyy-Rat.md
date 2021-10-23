@@ -7,7 +7,7 @@ tags: [malware-unpacking,unpacking]
 math: false
 mermaid: true
 image:
-  src: https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/FlawedAmmyy-RAT.png?raw=true?raw=true
+  src: https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/FlawedAmmyy-RAT.png?raw=true
   width: 850
   height: 585
 ---

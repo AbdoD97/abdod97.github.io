@@ -367,7 +367,7 @@ Then the running file is deleting itself and it ends :)
 
 2.  C:\\ ProgramData\\Nuggets\\wsus.exe
 
-> ?? refers to the (guid.Part3 + guid.Part1 \* guid.Part2)
+    > ?? refers to the (guid.Part3 + guid.Part1 \* guid.Part2)
 
 ## **URL**
 

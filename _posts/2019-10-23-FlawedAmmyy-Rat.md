@@ -40,8 +40,7 @@ At Malware initial assessment using **Pestudio** and **DIE (Detect it
 easy),** it was found that the sample is **Windows Exe (x86-32)** and it
 has **(Microsoft Visual C/C++(6.0))** compiler stamp
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image1.png?raw=true){width="5.628788276465442in"
-height="2.626768372703412in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image1.png?raw=true)
 
 By analyzing the entropy of file sections, it looks like there is
 appended part on the exe (**Overlay)** that is packed and indirectly

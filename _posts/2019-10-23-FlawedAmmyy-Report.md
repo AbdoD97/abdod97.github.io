@@ -14,7 +14,7 @@ image:
 
 **Sample 2 report**
 
-[]{#_Toc80190129 .anchor}**Document info**
+**Document info**
 
 **Sample Name: Sample2**
 

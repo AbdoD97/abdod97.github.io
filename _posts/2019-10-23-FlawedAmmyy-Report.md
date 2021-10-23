@@ -7,22 +7,16 @@ tags: [malware-unpacking,unpacking]
 math: false
 mermaid: true
 image:
-  src: https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/media/Untitled-3.jpg?raw=true
+  src: https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/FlawedAmmyy-RAT.png?raw=true
   width: 850
   height: 585
 ---
 
-**Sample 2 report**
+FlawedAmmyy is a remote access Trojan (RAT) which is based on leaked Ammyy Admin software. Ammyy Admin is a popular remote access tool used by businesses and consumers to handle remote control and diagnostics on Microsoft Windows machines which makes the FlawedAmmyy RAT to exhibit the functionality of the leaked version, including remote desktop control, file system manager, proxy support and audio chat.
 
-**Document info**
+FlawedAmmyy was used in both massive campaigns such as phishing campaigns, to potentially create a large base of compromised computers, as well as targeted campaigns that create opportunities for actors to steal customer data, proprietary information, and more. In the latest campaign of TA505 which is a prolific Cybercriminal group known for attacks against multiple financial institutions and retail companies, they started using HTML attachments to deliver malicious .XLS files that lead to downloader and backdoor FlawedAmmyy, mostly to target South Korean users.
 
-**Sample Name: Sample2**
 
-**Author: Abdelrahman Eldawi**
-
-**Description: Trojan downloader**
-
-**Attachments: Unpacked sample, Removal scripts**
 
 []{#_Toc80190130 .anchor}**Sample Information**
 

@@ -75,6 +75,7 @@ strings that give us information about the behavior of the malware and
 what it tries to do on a system.
 
 ![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image5.png?raw=true)
+
 ![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image6.png?raw=true)
 
 These strings are combination of CMD commands, URL, System Paths, Files.
@@ -168,7 +169,6 @@ before
 
 Then it tries to delete it once more
 
-## 
 
 ## exec_cmd function
 
@@ -191,8 +191,10 @@ victim
 
 Then it deletes the file **"C:\\**
 **ProgramData\\Nuggets\\template\_??.TMPTMPZIP7"** for the purpose of
-old instances cleaning ***\*\*?? refers to the (guid.Part3 + guid.Part1
-\* guid.Part2)\*\****
+old instances cleaning 
+
+>?? refers to the (guid.Part3 + guid.Part1
+\* guid.Part2)
 
 Let's continue with the code
 
@@ -252,7 +254,7 @@ At first it creates an array of length **256** and initiate it with
 numbers from \[**0>255**\] in sequence
 
 a\[0\] = 0 , a\[1\] = 1 ...... therefore **a\[j\] = j** until it loops
-256 timesx
+256 times
 
 ```c
 v7 += j + dec_key[v8] 
@@ -355,9 +357,9 @@ Then the running file is deleting itself and it ends :)
 
 2.  Sample2_unpacked.exe
 
-MD5:71B183A44F755CA170FC2E29B05B64D5
+    MD5:71B183A44F755CA170FC2E29B05B64D5
 
-> SHA1:67FC3717E0EA134599633E1E7E8DAF6CC0857F99
+    SHA1:67FC3717E0EA134599633E1E7E8DAF6CC0857F99
 
 ## **Files**
 

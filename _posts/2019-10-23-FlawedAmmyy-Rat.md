@@ -1,5 +1,5 @@
 ---
-title: FlawedAmmyy Rat Report
+title: FlawedAmmyy Rat
 author: Abdelrahman Eldawi
 date: 2021-10-23 14:33:00 +0800
 categories: [malware-reports]

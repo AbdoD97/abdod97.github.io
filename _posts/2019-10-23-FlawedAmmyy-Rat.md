@@ -221,9 +221,9 @@ So, at this time I needed to emulate the download server, instead of
 using FakeNet I have setup a **loopback adapter** to redirect that
 specific IP to localhost and configured it's Ip to **54.38.127.28**,
 Then I used Python **SimpleHTTPServer** to serve the file.
-
+```python
 python -m SimpleHTTPServer 80
-
+```
 ![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image18.png?raw=true)
 
 Then the file was opened and handle was passed to "**hfile**"
@@ -254,13 +254,12 @@ numbers from \[**0>255**\] in sequence
 a\[0\] = 0 , a\[1\] = 1 ...... therefore **a\[j\] = j** until it loops
 256 timesx
 
-v7 += j + dec_key\[v8\]
-
+```c
+v7 += j + dec_key[v8] 
 v6 =j
-
-a\[j\] = a\[v7\]
-
-a\[v7\]=v6=j therefore a\[v7\] = j
+a[j] = a[v7]
+a[v7]=v6=j therefore a[v7] = j
+```
 
 The variable **v8** keeps increasing till it reaches the (**secret
 key**) length then it's set to 0 again, after it ends, the decoding
@@ -288,16 +287,14 @@ decryption algorithm loop till it reaches the end of the downloaded
 file, noting that variable **v7** is increased by one every iteration,
 simplified pseudo code is shown downside for more illustration
 
-V6+= decoding_arr\[v7\]
+```c
+V6+= decoding_arr[v7]
+V5 = decoding_arr[v7]
+decoding_arr[v7] = decoding_arr[v6]
+decoding_arr[v6] = v5 = decoding_arr[v7]
+EncryptedFile[i] Xor decoding_arr[decoding_arr[v6]+decoding_array[v7]]
+```
 
-V5 = decoding_arr\[v7\]
-
-decoding_arr\[v7\] = decoding_arr\[v6\]
-
-decoding_arr\[v6\] = v5 **= decoding_arr\[v7\]**
-
-**EncryptedFile\[i\] Xor
-decoding_arr\[decoding_arr\[v6\]+decoding_array\[v7\]\]**
 
 ## Returning back to main function analysis
 

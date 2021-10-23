@@ -20,19 +20,18 @@ FlawedAmmyy was used in both massive campaigns such as phishing campaigns, to po
 
 []{#_Toc80190130 .anchor}**Sample Information**
 
-**SHA256
-CB114123CA1C33071CF6241C3E5054A39B6F735D374491DA0B33DFDAA1F7EA22**
+SHA256:CB114123CA1C33071CF6241C3E5054A39B6F735D374491DA0B33DFDAA1F7EA22
 
-**MD5 B635C11EFDF4DC2119FA002F73A9DF7B**
+MD5:B635C11EFDF4DC2119FA002F73A9DF7B
 
-**Sample Type Windows Exe (x86-32)**
+Sample Type Windows Exe (x86-32)
 
-[]{#_Toc80132801 .anchor}**Executive Summary**
+**Executive Summary**
 
-**This malware is just a downloader for the actual encrypted malware to
+This malware is just a downloader for the actual encrypted malware to
 evade detection, it decrypts then executes it, also it enforces some
 persistence techniques according to the running environment to make sure
-that the malware would still be there in victim's machine**
+that the malware would still be there in victim's machine
 
 
 # Initial assessment

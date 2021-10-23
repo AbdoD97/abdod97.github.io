@@ -18,7 +18,7 @@ FlawedAmmyy was used in both massive campaigns such as phishing campaigns, to po
 
 
 
-[]{#_Toc80190130 .anchor}**Sample Information**
+**Sample Information**
 
 SHA256:CB114123CA1C33071CF6241C3E5054A39B6F735D374491DA0B33DFDAA1F7EA22
 
@@ -47,16 +47,14 @@ By analyzing the entropy of file sections, it looks like there is
 appended part on the exe (**Overlay)** that is packed and indirectly
 loaded after the malware is executed
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image2.png?raw=true){width="6.5in"
-height="4.486111111111111in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image2.png?raw=true)
 
 ## Unpacking
 
 To unpack the file, I used **Unpac.me** online service and it was able
 to extract the unpacked child
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image3.png?raw=true){width="6.5in"
-height="2.092361111111111in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image3.png?raw=true)
 
 **Unpacked Sample basic information**
 
@@ -66,8 +64,7 @@ SHA1: 67fc3717e0ea134599633e1e7e8daf6cc0857f99
 
 ## Imports
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image4.png?raw=true){width="6.34375in"
-height="4.895833333333333in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image4.png?raw=true)
 
 We can find lots of interesting API calls which is able to **manipulate
 Registry**, **Files** & **Execute processes ... etc**
@@ -78,9 +75,8 @@ If we examine the strings of malware, we can identify a lot of malicious
 strings that give us information about the behavior of the malware and
 what it tries to do on a system.
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image5.png?raw=true){width="5.145833333333333in"
-height="2.375in"}![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image6.png?raw=true){width="2.3958333333333335in"
-height="1.7395833333333333in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image5.png?raw=true)
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image6.png?raw=true)
 
 These strings are combination of CMD commands, URL, System Paths, Files.
 
@@ -96,22 +92,20 @@ And some interested paths and files
 Using **any.run** service it was found that the malware is querying the
 domain controller for the machine, then it deletes itself.
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image7.png?raw=true){width="4.757575459317585in"
-height="2.4052187226596677in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image7.png?raw=true)
 
 Looking at HTTP requests, it tried to download a file but the server
 didn't respond, so this clarifies why it deleted itself from the system
 at the first place
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image8.png?raw=true){width="6.5in"
-height="1.2090277777777778in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image8.png?raw=true)
 
 # Analysis part
 
 \*All functions were renamed by me to easy explanations
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image9.png?raw=true){width="6.5in"
-height="3.526388888888889in"} The first variable v18 is calling a
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image9.png?raw=true)
+The first variable v18 is calling a
 function to get the Major & Minor version of the windows in order to
 identify the windows version
 
@@ -131,8 +125,7 @@ compliment, one of them will be TRUE
 
 ## Delete_wsus_exe function
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image10.png?raw=true){width="4.875in"
-height="2.1666666666666665in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image10.png?raw=true)
 
 At first it executes (**SHGetSpecialFolderPathA**) it retrieves the path
 of a special folder, identified by its CSIDL, 0x23 CSIDL refers to
@@ -149,19 +142,16 @@ running.
 **This function wasn't called directly, But it was dynamically resolved
 and this how it looked like**
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image11.png?raw=true){width="2.9583333333333335in"
-height="0.8229166666666666in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image11.png?raw=true)
 
 **After tracing inside this function**
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image12.png?raw=true){width="4.520833333333333in"
-height="1.09375in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image12.png?raw=true)
 
 By setting a breakpoint on the return of the **(sub_401540)** and
 checking the return value we can find that
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image13.png?raw=true){width="4.427083333333333in"
-height="0.8333333333333334in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image13.png?raw=true)
 
 It loaded Shell32_IsUserAnAdmin
 
@@ -169,8 +159,7 @@ Then it checks whether the malware was executed with an admin privilege
 
 ## Terminate process function
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image14.png?raw=true){width="6.5in"
-height="3.448611111111111in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image14.png?raw=true)
 
 As it appears it takes a snapshot of processes already running and loop
 on them till it find "wsus.exe", If so, it would terminate it
@@ -208,8 +197,7 @@ old instances cleaning ***\*\*?? refers to the (guid.Part3 + guid.Part1
 
 Let's continue with the code
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image15.png?raw=true){width="6.100528215223097in"
-height="2.900251531058618in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image15.png?raw=true)
 
 As we can see **file_downloader_write** is called and it's the function
 responsible for downloading the malware, The reference passed to this
@@ -218,11 +206,9 @@ function as **highlighted is the reference for the URL**
 
 ## file_downloader_write 
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image16.png?raw=true){width="6.5in"
-height="3.4458333333333333in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image16.png?raw=true)
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image17.png?raw=true){width="4.727272528433946in"
-height="1.0634426946631672in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image17.png?raw=true)
 
 It loads the lib "**wininet.dll**" then "**InternetReadFile ,
 InternetOpenA, InternetOpenUrlA"** functions were resolved also to visit
@@ -239,8 +225,7 @@ Then I used Python **SimpleHTTPServer** to serve the file.
 
 python -m SimpleHTTPServer 80
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image18.png?raw=true){width="3.0694444444444446in"
-height="3.0555555555555554in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image18.png?raw=true)
 
 Then the file was opened and handle was passed to "**hfile**"
 
@@ -256,42 +241,11 @@ catching it in the way, So it decrypts it in house to be able to use it
 
 The decryption key used in the function is "Porow2uj548423"
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image19.png?raw=true){width="6.5in" height="1.5375in"}
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
-
-### 
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image19.png?raw=true)
 
 ### Create the decoding array function
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image20.png?raw=true){width="6.4947845581802275in"
-height="3.5984853455818024in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image20.png?raw=true)
 
 Then how is this working?
 
@@ -313,8 +267,7 @@ The variable **v8** keeps increasing till it reaches the (**secret
 key**) length then it's set to 0 again, after it ends, the decoding
 matrix constructed from the word should be like the illustration below
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image21.png?raw=true){width="5.037878390201225in"
-height="1.8287018810148732in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image21.png?raw=true)
 
 ### Decryption function
 
@@ -326,8 +279,7 @@ passed into the first function**
 
 **Sub_4126E0**
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image22.png?raw=true){width="6.5in"
-height="2.435416666666667in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image22.png?raw=true)
 
 **v5, v6 , v7 are int8 so their max num is 256 then it overflows and
 start from beginning**
@@ -350,8 +302,7 @@ decoding_arr\[decoding_arr\[v6\]+decoding_array\[v7\]\]**
 
 ## Returning back to main function analysis
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image23.png?raw=true){width="6.5in"
-height="3.472916666666667in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image23.png?raw=true)
 
 Then it checks whether the decryption was done correctly or not by
 checking the magic bytes "**MZ**" on the decrypted file buffer then
@@ -368,10 +319,9 @@ If it has admin privilege then it will continue to the next function.
 
 ## Persistence function
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image24.png?raw=true){width="6.5in" height="3.45625in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image24.png?raw=true)
 
-![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image25.png?raw=true){width="6.5in"
-height="0.6048611111111111in"}
+![](https://github.com/AbdoD97/abdod97.github.io/blob/master/_posts/mediaFlawwed/media/image25.png?raw=true)
 
 At first it resolves "**SHGetSpecialFolderPathW**" api using its ordinal
 number **175.**
@@ -438,37 +388,4 @@ MD5:71B183A44F755CA170FC2E29B05B64D5
 1.  **Foundation** service, **auto executes** this file on startup
     C:\\ProgramData\\NuGets\\wsus.exe
 
-**\
-**
 
-# Methodology
-
-1.  Checking the sample type either it's an executable or not
-
-2.  If it appears to be an executable, Initial malware assessment begin
-
-3.  Checking **sections**, **imports**, **strings**, **entropy** to get
-    some knowledge about the malware (Functions they use, any meaningful
-    strings, packed or not .... Etc.) using **PEStudio**, **DIE** and
-    **PEID**.
-
-4.  If it's packed, we will go through process of automated or manual
-    unpacking
-
-5.  Using sandboxes to run the malware such as **Any.Run** to be able to
-    gain extra knowledge about its behavior, different tests should be
-    applied under **different conditions** (Admin privileges, different
-    OS, Waiting additional time ...etc.)
-
-6.  Scanning via **VirusTotal** is an important step to check the
-    feedback of various antiviruses about this malware also the
-    community comments
-
-7.  Static & Dynamic Analysis using proper tools, in this case
-    **IdaPro** can be used as **debugger** & **disassembler**, **Process
-    Monitor** to keep track of malware behavior by tracking **API
-    calls** and various operations, **Process explorer** to check
-    **process hierarchy**, **hooked modules, Strings in memory** and
-    **TCP/IP** connections.
-
-8.  Extracting **IOCs**

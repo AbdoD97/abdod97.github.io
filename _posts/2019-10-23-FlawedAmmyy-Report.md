@@ -40,59 +40,6 @@ evade detection, it decrypts then executes it, also it enforces some
 persistence techniques according to the running environment to make sure
 that the malware would still be there in victim's machine**
 
-# Table of Contents {#table-of-contents .TOC-Heading}
-
-[**Document info** 1](#_Toc80190129)
-
-[**Sample Information** 1](#_Toc80190130)
-
-[**Executive Summary** 1](#_Toc80132801)
-
-[Initial assessment 3](#initial-assessment)
-
-[Unpacking 4](#unpacking)
-
-[Imports 5](#imports)
-
-[Strings 6](#strings)
-
-[Dynamic analysis using sandbox 7](#dynamic-analysis-using-sandbox)
-
-[Analysis part 8](#analysis-part)
-
-[Delete_wsus_exe function 9](#delete_wsus_exe-function)
-
-[Terminate process function 10](#terminate-process-function)
-
-[exec_cmd function 11](#exec_cmd-function)
-
-[file_downloader_write 12](#file_downloader_write)
-
-[Decrypt_File function 14](#decrypt_file-function)
-
-[Create the decoding array function
-15](#create-the-decoding-array-function)
-
-[Decryption function 16](#decryption-function)
-
-[Returning back to main function analysis
-17](#returning-back-to-main-function-analysis)
-
-[Persistence function 18](#persistence-function)
-
-[Indicator of compromises 19](#indicator-of-compromises)
-
-[**Hashes** 19](#hashes)
-
-[**Files** 19](#files)
-
-[**URL** 19](#url)
-
-[**Startup Registry** 19](#startup-registry)
-
-[**Services** 19](#services)
-
-[Methodology 20](#methodology)
 
 # Initial assessment
 
